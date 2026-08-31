@@ -20,7 +20,6 @@
         document.head.appendChild(css);
     </script>
     <style>
-        /* Forzar que el header cubra todo el ancho de la pantalla en el index */
         header {
             width: 100% !important;
             max-width: 100% !important;
@@ -29,7 +28,6 @@
             box-sizing: border-box !important;
         }
 
-        /* Asegurar que la barra interna del header mantenga el contenido centrado */
         header .navbar {
             max-width: 1300px !important;
             margin: 0 auto !important;
@@ -38,7 +36,6 @@
             padding: 0 20px !important;
         }
     </style>
-    
 </head>
 
 <body>
@@ -48,7 +45,7 @@
         <p>VACANTES PERALTA</p>
     </div>
 
-    <!-- Navegación Principal -->
+    <!-- Navegación Principal (CORREGIDA) -->
     <header>
         <nav class="navbar">
             <div class="logo-header">
@@ -56,12 +53,14 @@
                 <h1>VACANTES PERALTA</h1>
             </div>
 
-         <a href="index.html">INICIO</a>
-    <a href="empresas.html">EMPRESAS</a>
-    <a href="contacto.html">CONTACTO</a>
-    <a href="blog.html">BLOG</a>
-    <a href="curriculum.html">CURRÍCULUM</a>
-</div>
+            <!-- ENLACES CORRECTAMENTE ENVUELTOS DENTRO DE .nav-links -->
+            <div class="nav-links">
+                <a href="index.html">INICIO</a>
+                <a href="empresas.html">EMPRESAS</a>
+                <a href="contacto.html">CONTACTO</a>
+                <a href="blog.html">BLOG</a>
+                <a href="curriculum.html">CURRÍCULUM</a>
+            </div>
         </nav>
     </header>
 
@@ -172,45 +171,25 @@
         </section>
     </main>
 
-  <footer class="pie-pagina" style="margin-top: 50px;">
+    <footer class="pie-pagina" style="margin-top: 50px;">
         <div class="contenido-footer" style="display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center;">
             
-            <!-- Derechos reservados y Enlaces legales -->
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 0.9rem;">
                 <p>&copy; 2026 VACANTES PERALTA. Todos los derechos reservados.</p>
                 <span style="color: #666;">|</span>
-                <a href="politica-privacidad.html" style="color: #007bff; text-decoration: none; transition: color 0.2s;">Política de Privacidad</a>
+                <a href="politica-privacidad.html" style="color: #fdfdfd; text-decoration: none;">Política de Privacidad</a>
                 <span style="color: #666;">|</span>
-                <a href="terminos-condiciones.html" style="color: #007bff; text-decoration: none; transition: color 0.2s;">Términos y Condiciones</a>
+                <a href="terminos-condiciones.html" style="color: #fdfdfd; text-decoration: none;">Términos y Condiciones</a>
             </div>
 
-            <!-- Redes Sociales -->
             <div class="redes-sociales">
-                <!-- Facebook -->
                 <a href="https://www.facebook.com/61592374662642" target="_blank" rel="noopener noreferrer" class="btn-facebook">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
-                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                    </svg>
                     <span>Facebook</span>
                 </a>
-
-                <!-- Instagram -->
                 <a href="https://www.instagram.com/vacantesperalta/" target="_blank" rel="noopener noreferrer" class="btn-instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg>
                     <span>Instagram</span>
                 </a>
-
-                <!-- LinkedIn -->
                 <a href="https://www.linkedin.com/company/vacantes-peralta/" target="_blank" rel="noopener noreferrer" class="btn-linkedin">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                        <rect x="2" y="9" width="4" height="12"></rect>
-                        <circle cx="4" cy="4" r="2"></circle>
-                    </svg>
                     <span>LinkedIn</span>
                 </a>
             </div>
@@ -228,7 +207,6 @@
             loader.style.display = "none";
           }
         }
-
         document.addEventListener("DOMContentLoaded", quitarLoader);
         window.addEventListener("load", quitarLoader);
         setTimeout(quitarLoader, 800);
@@ -244,6 +222,5 @@
             document.body.appendChild(s);
         })();
     </script>
-
 </body>
 </html>

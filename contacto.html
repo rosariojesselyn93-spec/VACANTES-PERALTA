@@ -6,17 +6,17 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto | VACANTES PERALTA</title>
-   <script>
-    // Crea la etiqueta <link> dinámicamente con la hora exacta en milisegundos
-    var css = document.createElement('link');
-    css.rel = 'stylesheet';
-    css.href = 'style.css?v=' + new Date().getTime();
-    document.head.appendChild(css);
-</script>
+    <title>Contacto y Quiénes Somos | VACANTES PERALTA</title>
+    <script>
+        // Crea la etiqueta <link> dinámicamente con la hora exacta en milisegundos
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'style.css?v=' + new Date().getTime();
+        document.head.appendChild(css);
+    </script>
     <link rel="icon" type="image/jpeg" href="/Logo-vacantes.png">
-<link rel="apple-touch-icon" href="/Logo-vacantes.png">
-<style>
+    <link rel="apple-touch-icon" href="/Logo-vacantes.png">
+    <style>
         /* Forzar que el header cubra todo el ancho de la pantalla en el index */
         header {
             width: 100% !important;
@@ -38,97 +38,129 @@
 </head>
 
 <body>
-        <!-- Loader Global -->
-        <div id="global-loader">
-                <div class="spinner"></div>
-                <p>VACANTES PERALTA</p>
-        </div>
-
-<script>
-    (function() {
-        function quitarLoader() {
-            var loader = document.getElementById("global-loader");
-            if (loader && !loader.classList.contains("hidden")) {
-                loader.classList.add("hidden");
-            }
-        }
-
-        // Se ejecuta apenas el HTML está listo
-        document.addEventListener("DOMContentLoaded", quitarLoader);
-        // Se ejecuta cuando la página carga completa
-        window.addEventListener("load", quitarLoader);
-        // RESPALDO OBLIGATORIO: Máximo 1.5 segundos en pantalla
-        setTimeout(quitarLoader, 1500);
-    })();
-</script>
-
-        <!-- Tu header y navegación normales -->
-        <header> ... </header>
-<header>
-       <nav class="navbar">
-        <div class="logo-header">
-            <img src="/Logo-vacantes.png" alt="Vacantes Peralta">
-            <h1>VACANTES PERALTA</h1>
-        </div>
-
-      <div class="nav-links">
-    <a href="index.html">INICIO</a>
-    <a href="empresas.html">EMPRESAS</a>
-    <a href="contacto.html">CONTACTO</a>
-    <a href="blog.html">BLOG</a>
-    <a href="curriculum.html">CURRÍCULUM</a>
-</div>
-    </nav>
-</header>
-
-
-<main>
-
-<section class="contacto">
-
-    <h2>Contáctanos</h2>
-
-    <p>
-        ¿Tienes alguna pregunta o necesitas información?
-        Estamos disponibles para ayudarte.
-    </p>
-
-
-    <div class="datos-contacto">
-
-        <article>
-            <h3>Correo electrónico</h3>
-            <p>vacantesperalta@gmail.com</p>
-        </article>
-
-
-        <article>
-            <h3>Ubicación</h3>
-            <p>Santo Domingo, República Dominicana</p>
-        </article>
-
-
-        <article>
-            <h3>Horario de atención</h3>
-            <p>Lunes a Domingo de 8:00 AM a 5:00 PM</p>
-        </article>
-
+    <!-- Loader Global -->
+    <div id="global-loader">
+        <div class="spinner"></div>
+        <p>VACANTES PERALTA</p>
     </div>
 
+    <script>
+        (function() {
+            function quitarLoader() {
+                var loader = document.getElementById("global-loader");
+                if (loader && !loader.classList.contains("hidden")) {
+                    loader.classList.add("hidden");
+                }
+            }
 
-</section>
+            // Se ejecuta apenas el HTML está listo
+            document.addEventListener("DOMContentLoaded", quitarLoader);
+            // Se ejecuta cuando la página carga completa
+            window.addEventListener("load", quitarLoader);
+            // RESPALDO OBLIGATORIO: Máximo 1.5 segundos en pantalla
+            setTimeout(quitarLoader, 1500);
+        })();
+    </script>
 
-</main>
-<footer class="pie-pagina" style="margin-top: 50px;">
+    <!-- Header y navegación -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-header">
+                <img src="/Logo-vacantes.png" alt="Vacantes Peralta">
+                <h1>VACANTES PERALTA</h1>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">INICIO</a>
+                <a href="empresas.html">EMPRESAS</a>
+                <a href="contacto.html">CONTACTO</a>
+                <a href="blog.html">BLOG</a>
+                <a href="curriculum.html">CURRÍCULUM</a>
+            </div>
+        </nav>
+    </header>
+
+
+    <main style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+        
+        <!-- SECCIÓN QUIÉNES SOMOS, MISIÓN, VISIÓN Y VALORES -->
+        <section class="about-card" style="background: var(--card-bg, #ffffff); border: 1px solid var(--border-color, #e5deda); border-radius: 16px; padding: 40px; box-shadow: 0 4px 15px rgba(59, 39, 28, 0.04); margin-bottom: 40px;">
+            <h2 style="color: var(--brown-dark, #3b271c); font-size: 2rem; margin-bottom: 20px; font-weight: 700;">Quiénes Somos</h2>
+            
+            <div style="font-size: 1.05rem; color: var(--text-main, #2d241e); line-height: 1.8;">
+                <p style="margin-bottom: 15px;">
+                    <strong>Vacantes Peralta</strong> nació en el año <strong>2026</strong> en la ciudad de <strong>Santo Domingo</strong>, impulsada por una visión clara: transformar la manera en que el talento y las empresas se conectan en el mercado laboral.
+                </p>
+                
+                <p style="margin-bottom: 15px;">
+                    La idea surge de crear una página completamente gratuita donde el empleador tenga el control directo de las vacantes que publica, simplificando la captación de talento. Asimismo, fue diseñada pensando en los candidatos, ofreciéndoles acceso a educación laboral gratuita —como liderazgo, preparación para entrevistas y la elaboración de un currículum vitae profesional— en pocos clics.
+                </p>
+
+                <!-- Misión y Visión -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 30px 0;">
+                    <div style="background: #f4efed; padding: 25px; border-radius: 12px; border-left: 4px solid var(--brown-medium, #965230);">
+                        <h3 style="color: var(--brown-dark, #3b271c); font-size: 1.3rem; margin-bottom: 10px;">Misión</h3>
+                        <p style="font-size: 0.95rem; margin-bottom: 0;">Conectar de manera ágil, directa y gratuita a empleadores y candidatos, facilitando el control total en la publicación de ofertas y brindando herramientas de educación profesional accesibles para todos.</p>
+                    </div>
+                    <div style="background: #f4efed; padding: 25px; border-radius: 12px; border-left: 4px solid var(--brown-medium, #965230);">
+                        <h3 style="color: var(--brown-dark, #3b271c); font-size: 1.3rem; margin-bottom: 10px;">Visión</h3>
+                        <p style="font-size: 0.95rem; margin-bottom: 0;">Convertirnos en la plataforma de empleo y educación laboral líder y de mayor confianza del país, reconocida por empoderar a las empresas y profesionales mediante la innovación y la accesibilidad.</p>
+                    </div>
+                </div>
+
+                <!-- Valores -->
+                <h3 style="color: var(--brown-dark, #3b271c); font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 700;">Nuestros Valores</h3>
+                <ul style="list-style-type: none; padding-left: 0; display: grid; gap: 15px;">
+                    <li style="background: #ffffff; border: 1px solid var(--border-color, #e5deda); padding: 18px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+                        <strong style="color: var(--brown-medium, #965230);">Transparencia:</strong> Mantenemos procesos claros, abiertos y directos tanto para las empresas que publican como para los candidatos que buscan oportunidades.
+                    </li>
+                    <li style="background: #ffffff; border: 1px solid var(--border-color, #e5deda); padding: 18px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+                        <strong style="color: var(--brown-medium, #965230);">Honestidad:</strong> Actuamos con rectitud y verdad en cada interacción, garantizando un entorno confiable para toda nuestra comunidad.
+                    </li>
+                    <li style="background: #ffffff; border: 1px solid var(--border-color, #e5deda); padding: 18px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+                        <strong style="color: var(--brown-medium, #965230);">Integridad:</strong> Sostenemos una conducta ética firme y responsable en todo momento, velando por el respeto y la equidad en el mercado laboral.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE CONTACTO -->
+        <section class="contacto" style="background: var(--card-bg, #ffffff); border: 1px solid var(--border-color, #e5deda); border-radius: 16px; padding: 40px; box-shadow: 0 4px 15px rgba(59, 39, 28, 0.04);">
+            <h2 style="color: var(--brown-dark, #3b271c); font-size: 2rem; margin-bottom: 10px; font-weight: 700;">Contáctanos</h2>
+            <p style="color: var(--text-muted, #6b635b); margin-bottom: 30px; font-size: 1.05rem;">
+                ¿Tienes alguna pregunta o necesitas información? Estamos disponibles para ayudarte.
+            </p>
+
+            <div class="datos-contacto" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <article style="background: #f9f8f6; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color, #e5deda);">
+                    <h3 style="color: var(--brown-dark, #3b271c); font-size: 1.2rem; margin-bottom: 8px;">Correo electrónico</h3>
+                    <p style="color: var(--text-main, #2d241e);">vacantesperalta@gmail.com</p>
+                </article>
+
+                <article style="background: #f9f8f6; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color, #e5deda);">
+                    <h3 style="color: var(--brown-dark, #3b271c); font-size: 1.2rem; margin-bottom: 8px;">Ubicación</h3>
+                    <p style="color: var(--text-main, #2d241e);">Santo Domingo, República Dominicana</p>
+                </article>
+
+                <article style="background: #f9f8f6; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color, #e5deda);">
+                    <h3 style="color: var(--brown-dark, #3b271c); font-size: 1.2rem; margin-bottom: 8px;">Horario de atención</h3>
+                    <p style="color: var(--text-main, #2d241e);">Lunes a Domingo de 8:00 AM a 5:00 PM</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="pie-pagina" style="margin-top: 50px;">
         <div class="contenido-footer" style="display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center;">
             
             <!-- Derechos reservados y Enlaces legales -->
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 0.9rem;">
                 <p>&copy; 2026 VACANTES PERALTA. Todos los derechos reservados.</p>
                 <span style="color: #666;">|</span>
-                <a href="politica-privacidad.html" style="color: #007bff; text-decoration: none; transition: color 0.2s;">Política de Privacidad</a>
+                <a href="politica-privacidad.html" style="color: #fdfdfd; text-decoration: none; transition: color 0.2s;">Política de Privacidad</a>
                 <span style="color: #666;">|</span>
-                <a href="terminos-condiciones.html" style="color: #007bff; text-decoration: none; transition: color 0.2s;">Términos y Condiciones</a>
+                <a href="terminos-condiciones.html" style="color: #fdfdfd; text-decoration: none; transition: color 0.2s;">Términos y Condiciones</a>
             </div>
 
             <!-- Redes Sociales -->

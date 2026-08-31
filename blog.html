@@ -35,7 +35,7 @@
 
         /* ENCABEZADO DE ANCHO COMPLETO FORZADO */
         header {
-            background-color: #965230 !important;
+            background-color: var(--brown-medium) !important;
             width: 100% !important;
             max-width: 100% !important;
             margin: 0 !important;
@@ -369,10 +369,10 @@
             border: 1px solid var(--border-color);
         }
 
-        /* ESTILOS DEL PIE DE PÁGINA */
+        /* ESTILOS DEL PIE DE PÁGINA (Actualizado al tono marrón medio deseado) */
         .pie-pagina {
-            background-color: var(--brown-dark);
-            color: #dcd6d0;
+            background-color: var(--brown-medium);
+            color: #f3ece6;
             padding: 40px 20px;
             border-top: 1px solid var(--border-color);
         }
@@ -394,11 +394,11 @@
             align-items: center;
             gap: 15px;
             font-size: 0.9rem;
-            color: #dcd6d0;
+            color: #f3ece6;
         }
 
         .footer-links a {
-            color: #dcd6d0;
+            color: #f3ece6;
             text-decoration: none;
             transition: color 0.2s;
         }
@@ -419,8 +419,8 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 8px 16px;
             border-radius: 8px;
             color: #ffffff;
@@ -431,61 +431,17 @@
         }
 
         .redes-sociales a:hover {
-            background: var(--brown-medium);
-            border-color: var(--brown-medium);
-        }
-
-        /* ===================================================== */
-        /* DISEÑO RESPONSIVO PARA MÓVILES (INTEGRADO)             */
-        /* ===================================================== */
-        @media screen and (max-width: 768px) {
-            header, .navbar {
-                flex-direction: column !important;
-                align-items: center !important;
-                padding: 10px !important;
-                text-align: center !important;
-                height: auto !important;
-            }
-
-            .logo-header {
-                flex-direction: column !important;
-                gap: 8px !important;
-                margin-bottom: 10px !important;
-            }
-
-            .logo-header h1 {
-                font-size: 1.25rem !important;
-            }
-
-            .nav-links {
-                display: flex !important;
-                flex-direction: row !important;
-                justify-content: center !important;
-                flex-wrap: wrap !important;
-                gap: 14px !important;
-                margin: 5px 0 0 0 !important;
-                padding: 0 !important;
-                width: 100% !important;
-            }
-
-            .nav-links a {
-                font-size: 14px !important;
-                padding: 4px 8px !important;
-            }
+            background: var(--brown-dark);
+            border-color: var(--brown-dark);
         }
     </style>
-</head>
-<body>
-    <!-- Loader Global -->
-    <div id="global-loader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.3s ease;">
-        <div class="spinner" style="border: 4px solid #f3f3f3; border-top: 4px solid #965230; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 10px;"></div>
-        <p style="font-family: sans-serif; font-weight: bold; color: #3b271c;">VACANTES PERALTA</p>
-    </div>
-    <style>
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    </style>
-
-    <!-- Navegación Principal -->
+       <!-- Carga dinámica de CSS sin caché -->
+    <script>
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'style.css?v=' + new Date().getTime();
+        document.head.appendChild(css);
+    </script>
     <header>
         <nav class="navbar">
             <div class="logo-header">
@@ -494,12 +450,12 @@
             </div>
 
            <div class="nav-links">
-   <a href="index.html">INICIO</a>
-    <a href="empresas.html">EMPRESAS</a>
-    <a href="contacto.html">CONTACTO</a>
-    <a href="blog.html">BLOG</a>
-    <a href="curriculum.html">CURRÍCULUM</a>
-</div>
+                <a href="index.html">INICIO</a>
+                <a href="empresas.html">EMPRESAS</a>
+                <a href="contacto.html">CONTACTO</a>
+                <a href="blog.html" class="active">BLOG</a>
+                <a href="curriculum.html">CURRÍCULUM</a>
+            </div>
         </nav>
     </header>
 
@@ -663,9 +619,9 @@
         <div class="contenido-footer">
             <div class="footer-links">
                 <p>&copy; 2026 VACANTES PERALTA. Todos los derechos reservados.</p>
-                <span style="color: #6b635b;">|</span>
+                <span style="color: #fdfdfd;">|</span>
                 <a href="politica-privacidad.html">Política de Privacidad</a>
-                <span style="color: #6b635b;">|</span>
+                <span style="color: #fdfdfd;">|</span>
                 <a href="terminos-condiciones.html">Términos y Condiciones</a>
             </div>
 

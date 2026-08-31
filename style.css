@@ -1,18 +1,18 @@
 /* =====================================================
-   VACANTES PERALTA - HOJA DE ESTILOS UNIFICADA
-   Paleta Oficial:
-   - Terracota Principal: #A05C3F / #A86649
-   - Terracota Oscuro:    #8C4F37
-   - Beige Arena:         #BFA68A
-   - Beige Claro:         #D8CEC1
-   - Crema Fondo:         #F5F1EB
-   - Texto Oscuro:        #3D3028
-   - Blanco:              #FFFFFF
+    VACANTES PERALTA - HOJA DE ESTILOS UNIFICADA (CORREGIDA)
+    Paleta Oficial:
+    - Terracota Principal: #A05C3F / #A86649
+    - Terracota Oscuro:    #8C4F37
+    - Beige Arena:         #BFA68A
+    - Beige Claro:         #D8CEC1
+    - Crema Fondo:         #F5F1EB
+    - Texto Oscuro:        #3D3028
+    - Blanco:              #FFFFFF
 ===================================================== */
 
 /* -----------------------------------------------------
    0. CONFIGURACIÓN GLOBAL & RESET
-   ----------------------------------------------------- */
+  ----------------------------------------------------- */
 * {
   box-sizing: border-box;
 }
@@ -47,7 +47,7 @@ footer {
 
 /* -----------------------------------------------------
    1. COMPONENTES COMPARTIDOS (HEADER, NAV, FOOTER)
-   ----------------------------------------------------- */
+  ----------------------------------------------------- */
 
 /* Header & Navegación (Fijo) */
 header {
@@ -226,7 +226,7 @@ form:not(.form-card form) button:hover {
 
 /* -----------------------------------------------------
    2. PÁGINA: INICIO / PRINCIPAL (index.html)
-   ----------------------------------------------------- */
+  ----------------------------------------------------- */
 
 section {
   text-align: center;
@@ -274,7 +274,7 @@ section p {
   align-items: center;
   gap: 10px;
   margin: 20px auto;
-  flex-wrap: wave;
+  flex-wrap: wrap;
 }
 
 .contenedor-buscador input[type="text"],
@@ -380,7 +380,7 @@ section p {
 
 /* -----------------------------------------------------
    3. PÁGINA: DETALLE DE VACANTE (detalle.html)
-   ----------------------------------------------------- */
+  ----------------------------------------------------- */
 
 .detalle-vacante {
   max-width: 950px;
@@ -456,9 +456,8 @@ section p {
 
 /* -----------------------------------------------------
    4. PÁGINA: PANEL DE CONTROL DE EMPRESAS (panel.html)
-   ----------------------------------------------------- */
+  ----------------------------------------------------- */
 
-/* Barra Superior de Usuario */
 .header-usuario,
 .user-bar {
   background-color: #A05C3F !important;
@@ -484,7 +483,6 @@ section p {
   color: #F3D8C8 !important;
 }
 
-/* Botón Cerrar Sesión */
 #btn-cerrar-sesion,
 .btn-logout {
   background-color: #8C4F37 !important;
@@ -502,7 +500,6 @@ section p {
   background-color: #3D3028 !important;
 }
 
-/* Layout en Grid de 2 Columnas para el Panel */
 .panel-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -510,7 +507,6 @@ section p {
   align-items: start;
 }
 
-/* Tarjetas Principales del Panel */
 .form-card,
 .lista-card,
 .panel-card {
@@ -523,7 +519,6 @@ section p {
   border-top: 4px solid #A05C3F !important;
 }
 
-/* Títulos principales del Panel */
 .form-card h2,
 .lista-card h2,
 .panel-card h3 {
@@ -542,7 +537,6 @@ section p {
   margin-bottom: 20px;
 }
 
-/* Inputs y Selects Estandarizados */
 .campo-form label,
 .form-group label,
 .campo-formulario label {
@@ -591,7 +585,7 @@ section p {
 
 /* -----------------------------------------------------
    5. FORMULARIOS GENERALES (Login / Registro / Contacto)
-   ----------------------------------------------------- */
+  ----------------------------------------------------- */
 
 form:not(.form-card form) {
   max-width: 750px;
@@ -636,7 +630,7 @@ form:not(.form-card form) textarea {
 
 /* -----------------------------------------------------
    6. COMPONENTES EXTRA (Loader, Compartir, etc.)
-   ----------------------------------------------------- */
+  ----------------------------------------------------- */
 
 #global-loader {
   position: fixed;
@@ -675,76 +669,9 @@ form:not(.form-card form) textarea {
 }
 
 /* -----------------------------------------------------
-   7. DISEÑO RESPONSIVO (TABLETS Y MÓVILES)
-   ----------------------------------------------------- */
+   7. COMPONENTES ADICIONALES (Cards, Compartir, Cookies, etc.)
+  ----------------------------------------------------- */
 
-@media (max-width: 850px) {
-  .panel-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  header, .navbar {
-    height: auto !important;
-    min-height: fit-content !important;
-    padding: 15px 10px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-  }
-
-  .logo-header {
-    flex-direction: column !important;
-    gap: 8px !important;
-    margin-bottom: 10px !important;
-  }
-
-  .logo-header h1 {
-    font-size: 1.3rem !important;
-  }
-
-  .nav-links {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: center !important;
-    flex-wrap: wrap !important;
-    gap: 12px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-  }
-
-  .nav-links a {
-    font-size: 0.85rem !important;
-    padding: 4px 8px !important;
-  }
-
-  .grid-vacantes, .container, .row {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    padding: 0 10px !important;
-  }
-
-  .info-card, .form-card, .card {
-    width: 100% !important;
-    margin-bottom: 15px !important;
-  }
-}
-
-@media (min-width: 600px) {
-  .contenido-footer {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-}
-/* =====================================================
-   CORRECCIÓN PARA EL PANEL DE EMPRESA (HTML ACTUAL)
-   ===================================================== */
-
-/* Contenedor principal de las tarjetas */
 .card {
     background: #ffffff !important;
     padding: 35px !important;
@@ -756,14 +683,12 @@ form:not(.form-card form) textarea {
     margin: 30px auto !important;
 }
 
-/* Forzar que el formulario apile los elementos verticalmente */
 #form-vacante {
     display: flex !important;
     flex-direction: column !important;
     gap: 12px !important;
 }
 
-/* Etiquetas estilizadas */
 #form-vacante label {
     display: block !important;
     font-weight: 600 !important;
@@ -773,7 +698,6 @@ form:not(.form-card form) textarea {
     font-size: 0.95rem !important;
 }
 
-/* Campos de texto, selects y textareas uniformes */
 #form-vacante input[type="text"],
 #form-vacante input[type="email"],
 #form-vacante select,
@@ -798,7 +722,6 @@ form:not(.form-card form) textarea {
     box-shadow: 0 0 0 3px rgba(160, 92, 63, 0.15) !important;
 }
 
-/* Botón de Enviar Vacante */
 #btn-publicar {
     width: 100% !important;
     background-color: #A05C3F !important;
@@ -817,44 +740,8 @@ form:not(.form-card form) textarea {
     background-color: #8C4F37 !important;
 }
 
-/* Barra superior del panel */
-header {
-    background-color: #A05C3F !important;
-    color: #ffffff !important;
-    padding: 18px 30px !important;
-    border-radius: 12px !important;
-    max-width: 900px !important;
-    margin: 20px auto 0 auto !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-}
-
-header h2 {
-    color: #ffffff !important;
-    font-size: 1.2rem !important;
-    margin: 0 !important;
-}
-
-/* Botón de cerrar sesión */
-#btn-cerrar-sesion {
-    background-color: #8C4F37 !important;
-    color: #ffffff !important;
-    border: none !important;
-    padding: 9px 18px !important;
-    border-radius: 6px !important;
-    font-weight: bold !important;
-    cursor: pointer !important;
-    transition: background 0.2s ease !important;
-}
-
-#btn-cerrar-sesion:hover {
-    background-color: #3D3028 !important;
-}
-/* Contenedor principal que une ambos botones en una sola fila */
 .contenedor-acciones-detalle, 
-.contenedor-botones-oferta { /* Ajusta esta clase al contenedor padre que engloba a "Aplicar" y "Compartir" */
+.contenedor-botones-oferta {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -862,7 +749,6 @@ header h2 {
     margin-top: 20px;
 }
 
-/* Estilo base del botón principal de compartir */
 .contenedor-compartir {
     position: relative;
     display: inline-block;
@@ -888,7 +774,6 @@ header h2 {
     border-color: #A05C3F;
 }
 
-/* Menú desplegable oculto por defecto */
 .menu-desplegable-compartir {
     display: none;
     position: absolute;
@@ -904,12 +789,10 @@ header h2 {
     overflow: hidden;
 }
 
-/* Mostrar menú cuando tenga la clase activa */
 .menu-desplegable-compartir.activo {
     display: block;
 }
 
-/* Estilos de las opciones internas */
 .menu-desplegable-compartir .opcion-menu {
     width: 100%;
     display: flex;
@@ -937,161 +820,30 @@ header h2 {
     background-color: #F8F6F2;
     color: #A05C3F;
 }
-/* Contenedor principal de las dos secciones del panel */
-.panel-container, .dashboard-grid { /* Usa el nombre de la clase real que envuelve a ambos bloques */
-    display: grid;
-    grid-template-columns: 1.4fr 0.9fr; /* La primera columna (formulario) será más ancha y la segunda más compacta */
-    gap: 30px; /* Espacio entre ambas tarjetas */
-    width: 100%;
-    max-width: 1300px; /* Ancho máximo de la pantalla del panel */
-    margin: 0 auto;
-    box-sizing: border-box;
-    padding: 0 20px;
-}
 
-/* Opcional: Asegurar que las tarjetas tomen todo el ancho de su celda asignada */
-.panel-seccion-publicar, 
-.panel-seccion-vacantes {
-    width: 100%;
-    box-sizing: border-box;
-}
-/* ==========================================
-   RESPONSIVE PARA CELULARES
-========================================== */
-@media screen and (max-width: 768px){
-
-    body{
-        padding-top:120px;
-    }
-
-    main,
-    .contenido-principal{
-        margin-top:20px;
-        padding:0 12px;
-    }
-
-    /* HEADER */
-
-    .navbar{
-        padding:10px;
-        flex-direction:column;
-    }
-
-    .logo-header img{
-        height:42px;
-    }
-
-    .logo-header h1{
-        font-size:1.25rem;
-    }
-
-    .nav-links{
-        margin-top:10px;
-        gap:14px;
-    }
-
-    .nav-links a{
-        font-size:14px;
-    }
-
-    /* HERO */
-
-    section h2{
-        font-size:2.2rem;
-        line-height:1.15;
-        margin-bottom:12px;
-    }
-
-    section p{
-        font-size:16px;
-        padding:0 10px;
-    }
-
-    /* BUSCADOR */
-
-    .contenedor-buscador{
-        display:flex;
-        flex-direction:column;
-        gap:12px;
-        width:100%;
-    }
-
-    .contenedor-buscador input,
-    .contenedor-buscador select,
-    .contenedor-buscador button{
-        width:100%;
-        min-width:0;
-    }
-
-    /* TITULO */
-
-    .titulo-seccion{
-        width:100%;
-        max-width:100%;
-        font-size:1.2rem;
-    }
-
-    /* TARJETAS */
-
-    #listaVacantes,
-    .lista-vacantes{
-        display:flex;
-        flex-direction:column;
-        gap:18px;
-        margin-top:20px;
-    }
-
-    .vacante{
-        width:100%;
-        min-height:auto;
-        padding:22px;
-    }
-
-    .vacante h3{
-        font-size:22px;
-    }
-
-    .vacante p{
-        font-size:15px;
-    }
-
-    .vacante a{
-        width:100%;
-        text-align:center;
-        margin-top:18px;
-    }
-
-}
-/* =====================================================
-   CORRECCIÓN DE COLORES AZULES EN EL BANNER DE COOKIES
-===================================================== */
-
-/* 1. Enlace de "Política de Privacidad" dentro del texto del banner */
 #cookie-banner a {
     color: #ffffff !important;
     text-decoration: underline !important;
 }
 
 #cookie-banner a:hover {
-    color: #F3D8C8 !important; /* Tono crema claro al pasar el cursor */
+    color: #F3D8C8 !important;
 }
 
-/* 2. Botón "Aceptar" del banner de cookies (cambiar fondo azul a blanco) */
 #btn-aceptar-cookies {
     background-color: #ffffff !important;
-    color: #3D3028 !important; /* Texto oscuro para que contraste con el fondo blanco */
+    color: #3D3028 !important;
     border: 1px solid #D8CEC1 !important;
 }
 
 #btn-aceptar-cookies:hover {
-    background-color: #F5F1EB !important; /* Fondo beige suave al pasar el cursor */
+    background-color: #F5F1EB !important;
 }
-/* Asegura que los contenedores de descripción, requisitos y beneficios estén alineados a la izquierda */
+
 #descripcion, #requisitos, #beneficios {
     text-align: left !important;
 }
 
-/* Corrige el formato de las listas para que las viñetas vayan al lado del texto con su sangría normal */
 #descripcion ul, #requisitos ul, #beneficios ul {
     list-style-type: disc !important;
     margin: 0 0 0 20px !important;
@@ -1105,51 +857,7 @@ header h2 {
     text-align: left !important;
     display: list-item !important;
 }
-/* Estilos para la barra de paginación numérica */
-.paginacion-numerada {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin: 40px 0;
-    flex-wrap: wrap;
-}
 
-.paginacion-numerada .btn-pagina {
-    background-color: #ffffff;
-    border: 1px solid #d1d5db;
-    color: #374151;
-    padding: 8px 14px;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    min-width: 40px;
-    text-align: center;
-}
-
-.paginacion-numerada .btn-pagina:hover {
-    background-color: #f3f4f6;
-    border-color: #9ca3af;
-}
-
-.paginacion-numerada .btn-pagina.activo {
-    background-color: #fdf8f6; /* Tono acorde a tu paleta de colores corporativa */
-    border-color: #b45309;   /* Color de borde activo */
-    color: #b45309;          /* Color de texto activo */
-    font-weight: bold;
-}
-
-.paginacion-numerada .paginacion-puntos {
-    color: #6b7280;
-    padding: 0 4px;
-    font-weight: bold;
-}
-.btn-paginacion { padding: 8px 15px; margin: 0 5px; cursor: pointer; border: 1px solid #ddd; background: #fff; }
-.btn-paginacion.activo { background: #007bff; color: white; border-color: #007bff; }
-#paginacion-container { display: flex; justify-content: center; margin-top: 20px; }
-/* --- ESTILOS PARA LA PAGINACIÓN --- */
 #paginacion-container {
     display: flex;
     justify-content: center;
@@ -1172,98 +880,137 @@ header h2 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
-/* Efecto al pasar el mouse por encima de los botones inactivos */
 .btn-paginacion:hover {
     background-color: #f1f3f5;
     border-color: #b0bec5;
     color: #b45309;  
 }
 
-/* Estilo para la página en la que te encuentras actualmente */
 .btn-paginacion.activo {
-    background-color: #b45309;  ; /* Coincide con tu color primario actual */
+    background-color: #b45309;
     color: #ffffff;
     border-color: #b45309;  
     box-shadow: 0 4px 8px rgba(177, 38, 38, 0.718);
 }
-/* Estilos específicos para las tarjetas de artículos en tonos marrones */
-    .blog-grid article {
-        background: var(--white) !important;
-        border: 1px solid var(--accent) !important;
-        border-radius: 8px !important;
-        padding: 24px !important;
-        box-shadow: 0 4px 6px rgba(62, 39, 35, 0.05) !important;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
 
-    .blog-grid article:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(62, 39, 35, 0.1) !important;
-    }
+/* -----------------------------------------------------
+   8. DISEÑO RESPONSIVO UNIFICADO PARA MÓVILES (FUSIÓN LIMPIA)
+  ----------------------------------------------------- */
 
-    .blog-grid article h3, 
-    .blog-grid article h2 {
-        color: var(--primary) !important;
-        margin-bottom: 12px !important;
-        font-size: 1.4rem;
-    }
-
-    .blog-grid article p {
-        color: var(--text) !important;
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-
-    /* Estilo para enlaces o botones "Leer más" dentro del artículo si los tienes */
-    .blog-grid article a {
-        color: var(--primary);
-        font-weight: bold;
-        text-decoration: none;
-        display: inline-block;
-        margin-top: 15px;
-    }
-
-    .blog-grid article a:hover {
-        text-decoration: underline;
-    }
-    /* --- FORZAR TODO A MARRÓN (ELIMINAR AZUL) --- */
-
-/* 1. Botones de "Leer más" o "Ver más" */
-.blog-grid article a, 
-.blog-grid .leer-mas, 
-.blog-grid .ver-mas {
-    color: #6d4c41 !important; /* Marrón principal */
-    border-color: #6d4c41 !important;
-    text-decoration: none !important;
+@media (max-width: 850px) {
+  .panel-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.blog-grid article a:hover {
-    color: #3e2723 !important; /* Marrón más oscuro al pasar el ratón */
-    text-decoration: underline !important;
-}
-
-/* 2. Fechas y Metadatos (Autor, Fecha) */
-.blog-grid article .fecha, 
-.blog-grid article .meta, 
-.blog-grid article time {
-    color: #8d6e63 !important; /* Marrón suave para fechas */
-    font-size: 0.85rem !important;
-    display: block !important;
-    margin-bottom: 8px !important;
-}
-
-/* 3. Asegurar que ningún enlace de la cuadrícula sea azul por defecto */
-.blog-grid article * {
-    color: inherit !important; /* Hereda el color marrón, no el azul del navegador */
-}
-.card-estilo-vacante {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    border-top: 5px solid #a1887f; /* Esta línea le da el toque exacto de tus vacantes */
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+@media (min-width: 600px) {
+  .contenido-footer {
+    flex-direction: row;
     justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 768px) {
+    /* Cabecera compacta y fija arriba */
+    header {
+        position: sticky !important;
+        top: 0 !important;
+        height: auto !important;
+        min-height: fit-content !important;
+    }
+
+    .navbar {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 6px 8px !important;
+        gap: 4px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Logo y título en línea horizontal */
+    .logo-header {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .logo-header img {
+        height: 22px !important;
+        width: 22px !important;
+        object-fit: contain;
+    }
+
+    .logo-header h1 {
+        font-size: 0.9rem !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+    }
+
+    /* Menú de navegación horizontal con scroll táctil suave y fluido */
+    .nav-links {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important; /* Forzamos que se mantengan en una sola línea */
+        gap: 12px !important;
+        margin: 0 !important;
+        padding: 2px 4px !important;
+        width: 100% !important;
+        overflow-x: auto !important; /* Permite deslizar con el dedo de lado a lado */
+        white-space: nowrap !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Oculta la barra de scroll en Firefox */
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none; /* Oculta la barra de scroll en Chrome, Safari y Edge */
+    }
+
+    .nav-links a {
+        font-size: 0.78rem !important;
+        padding: 2px 0 !important;
+        flex-shrink: 0 !important; /* Evita que los textos se compriman o corten */
+        white-space: nowrap !important;
+        font-weight: 600 !important;
+    }
+
+    /* Ajustes generales móviles para contenedores y tarjetas */
+    main,
+    .contenido-principal {
+        margin-top: 15px !important;
+        padding: 0 10px !important;
+    }
+
+    .grid-vacantes, .container, .row {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        padding: 0 10px !important;
+    }
+
+    .info-card, .form-card, .card, .vacante {
+        width: 100% !important;
+        min-height: auto !important;
+        margin-bottom: 15px !important;
+    }
+
+    .contenedor-buscador {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+
+    .contenedor-buscador input,
+    .contenedor-buscador select,
+    .contenedor-buscador button {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
 }

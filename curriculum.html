@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador de Currículum - Vacantes Peralta</title>
-
-    <!-- Librería html2pdf para exportar el CV a PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <link rel="icon" type="image/jpeg" href="Logo-vacantes.png">
+    <link rel="apple-touch-icon" href="Logo-vacantes.png">
 
     <style>
         :root {
-            --primary: #2b3a4a;
-            --accent: #4f46e5;
-            --bg: #f3f4f6;
+            --primary: #1e3a8a;
+            --accent: #965230;
+            --bg: #f9f8f6;
             --white: #ffffff;
-            --text: #1f2937;
+            --text: #374151;
+            --sidebar-bg: #f8fafc;
+            --border-color: #e2e8f0;
         }
 
-        * {
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -27,11 +29,105 @@
         body {
             background-color: var(--bg);
             color: var(--text);
-            padding: 20px;
+            line-height: 1.6;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+        }
+
+        #global-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #global-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #965230;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes spin { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
+
+        header {
+            background-color: var(--accent);
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-header img {
+            height: 42px;
+            width: 42px;
+            object-fit: contain;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .logo-header h1 {
+            font-size: 1.35rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            opacity: 0.8;
+            text-decoration: underline;
         }
 
         .cv-generator-container {
@@ -41,6 +137,7 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 30px auto;
         }
 
         h1.main-title {
@@ -50,7 +147,6 @@
             font-size: 24px;
         }
 
-        /* Formulario de Edición */
         #cv-form {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -92,6 +188,18 @@
             border-color: var(--accent);
         }
 
+        .input-error {
+            border-color: #ef4444 !important;
+            background-color: #fef2f2;
+        }
+
+        .error-msg {
+            font-size: 11px;
+            color: #ef4444;
+            margin-top: 3px;
+            display: none;
+        }
+
         .section-separator {
             grid-column: span 2;
             border-top: 1px solid #d1d5db;
@@ -104,72 +212,110 @@
 
         .action-container {
             text-align: center;
-            margin-bottom: 25px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
 
         .btn-export {
-            background: #10b981;
+            background: #2563eb;
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 12px 28px;
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.05rem;
+            transition: opacity 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .btn-export:hover {
             opacity: 0.9;
         }
 
-        /* Título de la Vista Previa */
+        .btn-publicar {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.05rem;
+            transition: opacity 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .btn-publicar:hover {
+            opacity: 0.9;
+        }
+
         .preview-section-title {
             font-size: 18px;
             color: var(--primary);
             text-transform: uppercase;
             margin-bottom: 15px;
+            margin-top: 10px;
             font-weight: 700;
             border-bottom: 2px solid #e5e7eb;
             padding-bottom: 5px;
-            letter-spacing: 0.5px;
         }
 
-        /* ==========================================
-           PLANTILLA VISUAL ESTILO PROFESIONAL (PDF)
-           ========================================== */
+        .cv-preview-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+
         #cv-preview {
-            background: #ffffff;
-            border: 1px solid #d1d5db;
-            width: 210mm;
-            min-height: 297mm;
-            margin: 0 auto;
-            padding: 15mm;
-            color: #1f2937;
-            box-shadow: 0 0 10px rgba(0,0,0,0.05);
-            display: grid;
-            grid-template-columns: 32% 65%;
-            gap: 3%;
+            background-color: #ffffff !important;
+            border: 1px solid var(--border-color);
+            width: 750px;
+            min-width: 750px;
+            min-height: 1056px;
+            padding: 40px;
+            color: var(--text);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+            gap: 25px;
         }
 
-        /* Columna Izquierda */
         .cv-sidebar {
-            border-right: 1px solid #e5e7eb;
-            padding-right: 12px;
+            width: 34%;
+            background-color: var(--sidebar-bg);
+            border-right: 2px solid #edf2f7;
+            padding: 20px 15px;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .cv-main {
+            width: 66%;
+            padding: 10px 0;
+            box-sizing: border-box;
         }
 
         .cv-photo-container {
-            text-align: center;
-            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
 
         .cv-photo {
-            width: 110px;
-            height: 110px;
+            width: 95px;
+            height: 95px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #cbd5e1;
+            border: 3px solid var(--accent);
             background: #e2e8f0;
-            display: none;
+            display: none; 
+            margin-bottom: 18px;
         }
 
         .cv-block {
@@ -178,103 +324,196 @@
 
         .cv-block h3 {
             font-size: 11px;
-            color: #1e293b;
+            color: var(--primary);
             text-transform: uppercase;
-            border-bottom: 2px solid #334155;
-            padding-bottom: 3px;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            letter-spacing: 0.8px;
+            font-weight: 700;
         }
 
         .cv-block p, .cv-block li {
-            font-size: 11px;
-            line-height: 1.4;
-            color: #374151;
-            margin-bottom: 4px;
+            font-size: 11.5px;
+            line-height: 1.5;
+            color: var(--text);
+            margin-bottom: 5px;
             word-break: break-word;
         }
 
-        /* Corrección aplicada para forzar las viñetas */
         .cv-block ul {
-            list-style-type: disc !important;
-            list-style-position: inside !important;
-            padding-left: 5px !important;
-            margin: 0 !important;
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
         }
 
         .cv-block li {
-            display: list-item !important;
-            margin-bottom: 3px;
+            position: relative;
+            padding-left: 12px;
+            margin-bottom: 5px;
         }
 
-        /* Columna Derecha */
-        .cv-main {
-            padding-left: 5px;
+        .cv-block li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
         }
 
         .cv-main-header {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 12px;
         }
 
         .cv-main-header h1 {
-            font-size: 22px;
-            color: #0f172a;
+            font-size: 20px;
+            color: var(--primary);
             font-weight: 800;
             line-height: 1.1;
             text-transform: uppercase;
             word-break: break-word;
+            letter-spacing: 0.5px;
         }
 
         .cv-main-header h2 {
-            font-size: 13px;
-            color: #475569;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-top: 4px;
-            word-break: break-word;
-        }
-
-        .cv-main .cv-block h3 {
             font-size: 12px;
-            color: #1e293b;
-            border-bottom: 2px solid #334155;
-            margin-bottom: 8px;
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 6px;
+            word-break: break-word;
+            letter-spacing: 0.5px;
         }
 
         .cv-job-container {
-            margin-bottom: 10px;
+            margin-bottom: 14px;
+            background: #fafafa;
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
         }
 
         .cv-job-title {
-            font-weight: bold;
-            font-size: 11.5px;
-            color: #111827;
+            font-weight: 700;
+            font-size: 12px;
+            color: var(--primary);
         }
 
         .cv-job-company {
             font-style: italic;
             font-size: 11px;
             color: #4b5563;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
+        }
+
+        .pie-pagina {
+            background-color: var(--accent);
+            color: #f3ece6;
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .contenido-footer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: #f3ece6;
         }
 
         @media (max-width: 768px) {
+            header, .navbar {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+                text-align: center;
+            }
+            .nav-links {
+                gap: 15px;
+                margin-right: 0;
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
             #cv-form {
                 grid-template-columns: 1fr;
             }
             .form-group.full-width, .section-separator {
                 grid-column: span 1;
             }
+            #cv-preview {
+                flex-direction: column;
+                width: 100%;
+                min-width: 100%;
+            }
+            .cv-sidebar, .cv-main {
+                width: 100%;
+                border-right: none;
+                padding-right: 0;
+            }
+            .action-container {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
+
 <body>
+
+    <div id="global-loader">
+        <div class="spinner"></div>
+        <p style="font-family: sans-serif; font-weight: bold; color: #965230;">VACANTES PERALTA</p>
+    </div>
+
+    <script>
+        window.addEventListener("load", function() {
+            var loader = document.getElementById("global-loader");
+            if (loader) {
+                loader.classList.add("hidden");
+            }
+        });
+    </script>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo-header">
+                <img src="Logo-vacantes.png" alt="Vacantes Peralta">
+                <h1>VACANTES PERALTA</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">INICIO</a>
+                <a href="empresas.html">EMPRESAS</a>
+                <a href="contacto.html">CONTACTO</a>
+                <a href="blog.html">BLOG</a>
+                <a href="curriculum.html" class="active">CURRÍCULUM</a>
+            </div>
+        </nav>
+    </header>
 
     <div class="cv-generator-container">
         <h1 class="main-title">Generador de Currículum Profesional - Vacantes Peralta</h1>
 
-        <!-- Formulario -->
-        <form id="cv-form">
+        <div class="form-group full-width" style="margin-bottom: 15px;">
+            <label>Fotografía de Perfil (Opcional - Solo JPG o PNG)</label>
+            <input type="file" id="input-foto" accept="image/jpeg, image/png, image/webp">
+        </div>
+
+        <form id="cv-form" onsubmit="return false;">
             <div class="section-separator">Datos Personales y Contacto</div>
             <div class="form-group">
                 <label>Nombre</label>
@@ -290,11 +529,13 @@
             </div>
             <div class="form-group">
                 <label>Teléfono</label>
-                <input type="text" id="input-telefono" placeholder="Ej: 829-000-0000">
+                <input type="text" id="input-telefono" class="input-phone" placeholder="000-000-0000" maxlength="12">
+                <span class="error-msg" id="error-telefono">Debe tener 10 dígitos (000-000-0000)</span>
             </div>
             <div class="form-group">
                 <label>Correo Electrónico</label>
                 <input type="email" id="input-email" placeholder="ejemplo@correo.com">
+                <span class="error-msg" id="error-email">Debe incluir '@' para ser un correo válido</span>
             </div>
             <div class="form-group">
                 <label>Ubicación / Dirección</label>
@@ -302,258 +543,386 @@
             </div>
             <div class="form-group full-width">
                 <label>Sobre Mí (Resumen profesional)</label>
-                <textarea id="input-sobremi" rows="2" placeholder="Escribe una breve descripción sobre tus habilidades y metas..."></textarea>
+                <textarea id="input-sobremi" rows="2" placeholder="Escribe una breve descripción..."></textarea>
             </div>
 
             <div class="section-separator">Educación y Cursos</div>
             <div class="form-group full-width">
                 <label>Educación (Tus estudios)</label>
-                <textarea id="input-educacion" rows="3" placeholder="Universidad Autónoma de Santo Domingo - Psicología (2020-Presente)"></textarea>
+                <textarea id="input-educacion" rows="3" placeholder="Tus estudios recientes..."></textarea>
             </div>
             <div class="form-group full-width">
-                <label>Cursos / Talleres / Infotep (Escribe uno por línea, saldrán en viñetas)</label>
-                <textarea id="input-cursos" rows="3" placeholder="Excel Avanzado&#10;Primeros Auxilios&#10;Seguridad y Salud en el Trabajo"></textarea>
+                <label>Cursos / Talleres (Uno por línea)</label>
+                <textarea id="input-cursos" rows="3" placeholder="Curso 1&#10;Curso 2"></textarea>
             </div>
 
             <div class="section-separator">Experiencia Laboral 1</div>
             <div class="form-group">
                 <label>Nombre de la Empresa</label>
-                <input type="text" id="input-empresa1" placeholder="Ej: Mirsa Recycle">
+                <input type="text" id="input-empresa1" placeholder="Ej: Empresa ABC">
             </div>
             <div class="form-group">
                 <label>Posición o Cargo</label>
-                <input type="text" id="input-cargo1" placeholder="Ej: Encargada Recursos Humanos">
+                <input type="text" id="input-cargo1" placeholder="Ej: Asistente">
             </div>
             <div class="form-group full-width">
-                <label>Funciones y Logros (Experiencia 1)</label>
-                <textarea id="input-funciones1" rows="3" placeholder="- Gestión integral de procesos...&#10;- Administración de nómina..."></textarea>
+                <label>Funciones y Logros</label>
+                <textarea id="input-funciones1" rows="3" placeholder="- Tarea 1..."></textarea>
             </div>
 
             <div class="section-separator">Experiencia Laboral 2</div>
             <div class="form-group">
                 <label>Nombre de la Empresa</label>
-                <input type="text" id="input-empresa2" placeholder="Ej: Empresa ABC">
+                <input type="text" id="input-empresa2" placeholder="Ej: Empresa XYZ">
             </div>
             <div class="form-group">
                 <label>Posición o Cargo</label>
-                <input type="text" id="input-cargo2" placeholder="Ej: Asistente Administrativo">
+                <input type="text" id="input-cargo2" placeholder="Ej: Supervisor">
             </div>
             <div class="form-group full-width">
-                <label>Funciones y Logros (Experiencia 2)</label>
-                <textarea id="input-funciones2" rows="3" placeholder="- Control de asistencia...&#10;- Archivo de documentos..."></textarea>
+                <label>Funciones y Logros</label>
+                <textarea id="input-funciones2" rows="3" placeholder="- Tarea 1..."></textarea>
             </div>
 
             <div class="section-separator">Referencias Personales</div>
             <div class="form-group">
-                <label>Nombre - Referencia Personal 1</label>
-                <input type="text" id="input-refpers-nombre1" placeholder="Nombre completo">
+                <label>Nombre - Ref. Personal 1</label>
+                <input type="text" id="input-refpers-nombre1" class="input-capitalize" placeholder="Maria Perez">
             </div>
             <div class="form-group">
-                <label>Teléfono - Referencia Personal 1</label>
-                <input type="text" id="input-refpers-tel1" placeholder="829-000-0000">
+                <label>Teléfono - Ref. Personal 1</label>
+                <input type="text" id="input-refpers-tel1" class="input-phone" placeholder="000-000-0000" maxlength="12">
             </div>
             <div class="form-group">
-                <label>Nombre - Referencia Personal 2</label>
-                <input type="text" id="input-refpers-nombre2" placeholder="Nombre completo">
+                <label>Nombre - Ref. Personal 2</label>
+                <input type="text" id="input-refpers-nombre2" class="input-capitalize" placeholder="Maria Perez">
             </div>
             <div class="form-group">
-                <label>Teléfono - Referencia Personal 2</label>
-                <input type="text" id="input-refpers-tel2" placeholder="829-000-0000">
+                <label>Teléfono - Ref. Personal 2</label>
+                <input type="text" id="input-refpers-tel2" class="input-phone" placeholder="000-000-0000" maxlength="12">
             </div>
 
             <div class="section-separator">Referencias Laborales</div>
             <div class="form-group">
-                <label>Nombre - Referencia Laboral 1</label>
-                <input type="text" id="input-reflab-nombre1" placeholder="Nombre completo">
+                <label>Nombre - Ref. Laboral 1</label>
+                <input type="text" id="input-reflab-nombre1" class="input-capitalize" placeholder="Maria Perez">
             </div>
             <div class="form-group">
-                <label>Teléfono - Referencia Laboral 1</label>
-                <input type="text" id="input-reflab-tel1" placeholder="829-000-0000">
+                <label>Teléfono - Ref. Laboral 1</label>
+                <input type="text" id="input-reflab-tel1" class="input-phone" placeholder="000-000-0000" maxlength="12">
             </div>
             <div class="form-group">
-                <label>Nombre - Referencia Laboral 2</label>
-                <input type="text" id="input-reflab-nombre2" placeholder="Nombre completo">
+                <label>Nombre - Ref. Laboral 2</label>
+                <input type="text" id="input-reflab-nombre2" class="input-capitalize" placeholder="Maria Perez">
             </div>
             <div class="form-group">
-                <label>Teléfono - Referencia Laboral 2</label>
-                <input type="text" id="input-reflab-tel2" placeholder="829-000-0000">
+                <label>Teléfono - Ref. Laboral 2</label>
+                <input type="text" id="input-reflab-tel2" class="input-phone" placeholder="000-000-0000" maxlength="12">
             </div>
         </form>
 
-        <div class="action-container">
-            <button type="button" id="btn-exportar-pdf" class="btn-export">
-                📥 Descargar Currículum en PDF
-            </button>
+        <h2 class="preview-section-title">Vista Previa del Currículum</h2>
+        
+        <!-- Librerías html2canvas y jsPDF -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        
+        <div class="cv-preview-wrapper">
+            <div id="cv-preview">
+                <div class="cv-sidebar">
+                    <div class="cv-photo-container">
+                        <img src="" id="cv-foto-output" alt="Foto" class="cv-photo">
+                    </div>
+
+                    <div class="cv-block">
+                        <h3>Contacto</h3>
+                        <p id="cv-telefono-output">Tel: N/A</p>
+                        <p id="cv-email-output">N/A</p>
+                        <p id="cv-ubicacion-output">N/A</p>
+                    </div>
+
+                    <div class="cv-block">
+                        <h3>Educación</h3>
+                        <p id="cv-educacion-output" style="white-space: pre-line;">No definido</p>
+                    </div>
+
+                    <div class="cv-block">
+                        <h3>Cursos / Talleres</h3>
+                        <ul id="cv-cursos-output">
+                            <li>No definido</li>
+                        </ul>
+                    </div>
+
+                    <div class="cv-block">
+                        <h3>Ref. Personales</h3>
+                        <p id="cv-refpers-output" style="white-space: pre-line;">No definido</p>
+                    </div>
+                </div>
+
+                <div class="cv-main">
+                    <div class="cv-main-header">
+                        <h1 id="cv-nombre-apellido-output">NOMBRE APELLIDO</h1>
+                        <h2 id="cv-puesto-output">PUESTO O ÁREA DESEADA</h2>
+                    </div>
+
+                    <div class="cv-block">
+                        <h3>Sobre mí</h3>
+                        <p id="cv-sobremi-output" style="white-space: pre-line;">No definido</p>
+                    </div>
+
+                    <div class="cv-block">
+                        <h3>Experiencia Laboral</h3>
+                        <div id="cv-experiencia-output">
+                            <p style="font-style: italic; color: #6b7280;">No definido</p>
+                        </div>
+                    </div>
+
+                    <div class="cv-block">
+                        <h3>Ref. Laborales</h3>
+                        <p id="cv-reflab-output" style="white-space: pre-line;">No definido</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Título de Vista Previa agregado -->
-        <h2 class="preview-section-title">Vista Previa del Currículum</h2>
-
-        <!-- Vista Previa -->
-        <div id="cv-preview">
-            <!-- COLUMNA IZQUIERDA -->
-            <div class="cv-sidebar">
-                <div class="cv-photo-container">
-                    <img src="" id="cv-foto-output" alt="" class="cv-photo">
-                </div>
-
-                <div class="cv-block">
-                    <h3>Contacto:</h3>
-                    <p id="cv-telefono-output"></p>
-                    <p id="cv-email-output"></p>
-                    <p id="cv-ubicacion-output"></p>
-                </div>
-
-                <div class="cv-block">
-                    <h3>Educación:</h3>
-                    <p id="cv-educacion-output" style="white-space: pre-line;"></p>
-                </div>
-
-                <div class="cv-block">
-                    <h3>Cursos / Talleres:</h3>
-                    <ul id="cv-cursos-output"></ul>
-                </div>
-
-                <div class="cv-block">
-                    <h3>Referencias Personales:</h3>
-                    <p id="cv-refpers-output" style="white-space: pre-line;"></p>
-                </div>
-            </div>
-
-            <!-- COLUMNA DERECHA -->
-            <div class="cv-main">
-                <div class="cv-main-header">
-                    <h1 id="cv-nombre-apellido-output"></h1>
-                    <h2 id="cv-puesto-output"></h2>
-                </div>
-
-                <div class="cv-block">
-                    <h3>Sobre mi:</h3>
-                    <p id="cv-sobremi-output" style="white-space: pre-line;"></p>
-                </div>
-
-                <div class="cv-block">
-                    <h3>Experiencia Laboral:</h3>
-                    <div id="cv-experiencia-output"></div>
-                </div>
-
-                <div class="cv-block">
-                    <h3>Referencias Laborales:</h3>
-                    <p id="cv-reflab-output" style="white-space: pre-line;"></p>
-                </div>
-            </div>
+        <div class="action-container">
+            <button type="button" id="btn-descargar-png" class="btn-publicar">Descargar como PNG</button>
+            <button type="button" id="btn-exportar-pdf" class="btn-export">Descargar como PDF</button>
         </div>
     </div>
 
-    <!-- Script de sincronización y generación de PDF -->
+    <footer class="pie-pagina">
+        <div class="contenido-footer">
+            <div class="footer-links">
+                <p>&copy; 2026 VACANTES PERALTA. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        const inputs = document.querySelectorAll("#cv-form input, #cv-form textarea");
+        window.addEventListener("DOMContentLoaded", () => {
+            actualizarCV();
+        });
+
+        // Formateador automático de Teléfonos (000-000-0000)
+        document.querySelectorAll(".input-phone").forEach(input => {
+            input.addEventListener("input", function(e) {
+                let numbers = e.target.value.replace(/\D/g, "").substring(0, 10);
+                let formatted = "";
+                if (numbers.length > 0) {
+                    formatted = numbers.substring(0, 3);
+                }
+                if (numbers.length > 3) {
+                    formatted += "-" + numbers.substring(3, 6);
+                }
+                if (numbers.length > 6) {
+                    formatted += "-" + numbers.substring(6, 10);
+                }
+                e.target.value = formatted;
+                
+                // Validación visual de longitud
+                const errorSpan = e.target.parentElement.querySelector(".error-msg");
+                if (numbers.length > 0 && numbers.length < 10) {
+                    e.target.classList.add("input-error");
+                    if(errorSpan) errorSpan.style.display = "block";
+                } else {
+                    e.target.classList.remove("input-error");
+                    if(errorSpan) errorSpan.style.display = "none";
+                }
+                actualizarCV();
+            });
+        });
+
+        // Capitalizador automático de nombres (Ej: Maria Perez)
+        document.querySelectorAll(".input-capitalize").forEach(input => {
+            input.addEventListener("input", function(e) {
+                let words = e.target.value.toLowerCase().split(" ");
+                let capitalizedWords = words.map(word => {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                });
+                e.target.value = capitalizedWords.join(" ");
+                actualizarCV();
+            });
+        });
+
+        // Validación de correo electrónico (Obligatorio '@')
+        const inputEmail = document.getElementById("input-email");
+        inputEmail.addEventListener("input", function() {
+            const errorEmail = document.getElementById("error-email");
+            if (inputEmail.value.trim() !== "" && !inputEmail.value.includes("@")) {
+                inputEmail.classList.add("input-error");
+                errorEmail.style.display = "block";
+            } else {
+                inputEmail.classList.remove("input-error");
+                errorEmail.style.display = "none";
+            }
+            actualizarCV();
+        });
+
+        document.getElementById("input-foto").addEventListener("change", function(e) {
+            const archivo = e.target.files[0];
+            const imgOutput = document.getElementById("cv-foto-output");
+            if (archivo) {
+                const lector = new FileReader();
+                lector.onload = function(event) {
+                    imgOutput.src = event.target.result;
+                    imgOutput.style.display = "block";
+                }
+                lector.readAsDataURL(archivo);
+            } else {
+                imgOutput.src = "";
+                imgOutput.style.display = "none";
+            }
+        });
+
+        const inputs = document.querySelectorAll("#cv-form input:not(.input-phone):not(.input-capitalize), #cv-form textarea");
         inputs.forEach(input => {
             input.addEventListener("input", actualizarCV);
         });
 
         function actualizarCV() {
-            // Datos personales
-            const nombre = document.getElementById("input-nombre").value;
-            const apellido = document.getElementById("input-apellido").value;
-            document.getElementById("cv-nombre-apellido-output").textContent = `${nombre} ${apellido}`.trim();
+            const nombre = document.getElementById("input-nombre").value.trim();
+            const apellido = document.getElementById("input-apellido").value.trim();
+            const nombreCompleto = `${nombre} ${apellido}`.trim();
+            document.getElementById("cv-nombre-apellido-output").textContent = nombreCompleto !== "" ? nombreCompleto : "NOMBRE APELLIDO";
             
-            document.getElementById("cv-puesto-output").textContent = document.getElementById("input-puesto").value;
-            document.getElementById("cv-telefono-output").textContent = document.getElementById("input-telefono").value;
-            document.getElementById("cv-email-output").textContent = document.getElementById("input-email").value;
-            document.getElementById("cv-ubicacion-output").textContent = document.getElementById("input-ubicacion").value;
-            document.getElementById("cv-sobremi-output").textContent = document.getElementById("input-sobremi").value;
-            document.getElementById("cv-educacion-output").textContent = document.getElementById("input-educacion").value;
+            const puesto = document.getElementById("input-puesto").value.trim();
+            document.getElementById("cv-puesto-output").textContent = puesto !== "" ? puesto : "PUESTO O ÁREA DESEADA";
 
-            // Cursos en Viñetas (ul / li asegurados)
-            const cursosTexto = document.getElementById("input-cursos").value;
+            const telefono = document.getElementById("input-telefono").value.trim();
+            document.getElementById("cv-telefono-output").textContent = telefono !== "" ? `Tel: ${telefono}` : "Tel: N/A";
+
+            const email = document.getElementById("input-email").value.trim();
+            document.getElementById("cv-email-output").textContent = email !== "" ? email : "N/A";
+
+            const ubicacion = document.getElementById("input-ubicacion").value.trim();
+            document.getElementById("cv-ubicacion-output").textContent = ubicacion !== "" ? ubicacion : "N/A";
+
+            const sobremi = document.getElementById("input-sobremi").value.trim();
+            document.getElementById("cv-sobremi-output").textContent = sobremi !== "" ? sobremi : "No definido";
+
+            const educacion = document.getElementById("input-educacion").value.trim();
+            document.getElementById("cv-educacion-output").textContent = educacion !== "" ? educacion : "No definido";
+
+            const cursosTexto = document.getElementById("input-cursos").value.trim();
             const listaCursos = document.getElementById("cv-cursos-output");
             listaCursos.innerHTML = "";
-            if (cursosTexto.trim() !== "") {
-                const lineasCursos = cursosTexto.split("\n");
-                lineasCursos.forEach(curso => {
+            if (cursosTexto !== "") {
+                cursosTexto.split("\n").forEach(curso => {
                     if (curso.trim() !== "") {
                         const li = document.createElement("li");
                         li.textContent = curso.trim();
                         listaCursos.appendChild(li);
                     }
                 });
+            } else {
+                const li = document.createElement("li");
+                li.textContent = "No definido";
+                listaCursos.appendChild(li);
             }
 
-            // Experiencias Laborales
             const contenedorExp = document.getElementById("cv-experiencia-output");
             contenedorExp.innerHTML = "";
 
-            const empresa1 = document.getElementById("input-empresa1").value;
-            const cargo1 = document.getElementById("input-cargo1").value;
-            const funciones1 = document.getElementById("input-funciones1").value;
+            const empresa1 = document.getElementById("input-empresa1").value.trim();
+            const cargo1 = document.getElementById("input-cargo1").value.trim();
+            const funciones1 = document.getElementById("input-funciones1").value.trim();
+            
+            const empresa2 = document.getElementById("input-empresa2").value.trim();
+            const cargo2 = document.getElementById("input-cargo2").value.trim();
+            const funciones2 = document.getElementById("input-funciones2").value.trim();
+
+            let hayExperiencia = false;
 
             if (empresa1 || cargo1 || funciones1) {
+                hayExperiencia = true;
                 contenedorExp.innerHTML += `
                     <div class="cv-job-container">
-                        <div class="cv-job-title">${cargo1}</div>
-                        <div class="cv-job-company">${empresa1}</div>
-                        <p style="white-space: pre-line;">${funciones1}</p>
+                        <div class="cv-job-title">${cargo1 || "N/A"}</div>
+                        <div class="cv-job-company">${empresa1 || "N/A"}</div>
+                        <p style="white-space: pre-line;">${funciones1 || "N/A"}</p>
                     </div>
                 `;
             }
-
-            const empresa2 = document.getElementById("input-empresa2").value;
-            const cargo2 = document.getElementById("input-cargo2").value;
-            const funciones2 = document.getElementById("input-funciones2").value;
 
             if (empresa2 || cargo2 || funciones2) {
+                hayExperiencia = true;
                 contenedorExp.innerHTML += `
-                    <div class="cv-job-container" style="margin-top: 10px;">
-                        <div class="cv-job-title">${cargo2}</div>
-                        <div class="cv-job-company">${empresa2}</div>
-                        <p style="white-space: pre-line;">${funciones2}</p>
+                    <div class="cv-job-container">
+                        <div class="cv-job-title">${cargo2 || "N/A"}</div>
+                        <div class="cv-job-company">${empresa2 || "N/A"}</div>
+                        <p style="white-space: pre-line;">${funciones2 || "N/A"}</p>
                     </div>
                 `;
             }
 
-            // Referencias Personales
-            let refPersHtml = "";
-            const rpNombre1 = document.getElementById("input-refpers-nombre1").value;
-            const rpTel1 = document.getElementById("input-refpers-tel1").value;
-            if(rpNombre1 || rpTel1) {
-                refPersHtml += `${rpNombre1}\nTel: ${rpTel1}\n\n`;
+            if (!hayExperiencia) {
+                contenedorExp.innerHTML = `<p style="color: #6b7280;">No definido</p>`;
             }
-            const rpNombre2 = document.getElementById("input-refpers-nombre2").value;
-            const rpTel2 = document.getElementById("input-refpers-tel2").value;
-            if(rpNombre2 || rpTel2) {
-                refPersHtml += `${rpNombre2}\nTel: ${rpTel2}`;
-            }
-            document.getElementById("cv-refpers-output").textContent = refPersHtml.trim();
 
-            // Referencias Laborales
+            let refPersHtml = "";
+            const rpNombre1 = document.getElementById("input-refpers-nombre1").value.trim();
+            const rpTel1 = document.getElementById("input-refpers-tel1").value.trim();
+            if(rpNombre1 || rpTel1) refPersHtml += `${rpNombre1 || "N/A"}\nTel: ${rpTel1 || "N/A"}\n\n`;
+
+            const rpNombre2 = document.getElementById("input-refpers-nombre2").value.trim();
+            const rpTel2 = document.getElementById("input-refpers-tel2").value.trim();
+            if(rpNombre2 || rpTel2) refPersHtml += `${rpNombre2 || "N/A"}\nTel: ${rpTel2 || "N/A"}`;
+            
+            document.getElementById("cv-refpers-output").textContent = refPersHtml.trim() !== "" ? refPersHtml.trim() : "No definido";
+
             let refLabHtml = "";
-            const rlNombre1 = document.getElementById("input-reflab-nombre1").value;
-            const rlTel1 = document.getElementById("input-reflab-tel1").value;
-            if(rlNombre1 || rlTel1) {
-                refLabHtml += `${rlNombre1}\nTel: ${rlTel1}\n\n`;
-            }
-            const rlNombre2 = document.getElementById("input-reflab-nombre2").value;
-            const rlTel2 = document.getElementById("input-reflab-tel2").value;
-            if(rlNombre2 || rlTel2) {
-                refLabHtml += `${rlNombre2}\nTel: ${rlTel2}`;
-            }
-            document.getElementById("cv-reflab-output").textContent = refLabHtml.trim();
+            const rlNombre1 = document.getElementById("input-reflab-nombre1").value.trim();
+            const rlTel1 = document.getElementById("input-reflab-tel1").value.trim();
+            if(rlNombre1 || rlTel1) refLabHtml += `${rlNombre1 || "N/A"}\nTel: ${rlTel1 || "N/A"}\n\n`;
+
+            const rlNombre2 = document.getElementById("input-reflab-nombre2").value.trim();
+            const rlTel2 = document.getElementById("input-reflab-tel2").value.trim();
+            if(rlNombre2 || rlTel2) refLabHtml += `${rlNombre2 || "N/A"}\nTel: ${rlTel2 || "N/A"}`;
+            
+            document.getElementById("cv-reflab-output").textContent = refLabHtml.trim() !== "" ? refLabHtml.trim() : "No definido";
         }
 
-        // Exportar a PDF tamaño A4
-        document.getElementById("btn-exportar-pdf").addEventListener("click", () => {
-            const elementoCV = document.getElementById("cv-preview");
-            
-            const opciones = {
-                margin:       0,
-                filename:     'Curriculum_Vacantes_Peralta.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
+        // Descargar como PNG usando html2canvas
+        document.getElementById("btn-descargar-png").addEventListener("click", function() {
+            const element = document.getElementById("cv-preview");
+            html2canvas(element, { scale: 2, useCORS: true }).then(canvas => {
+                const link = document.createElement("a");
+                link.download = "curriculum-vacantes-peralta.png";
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        });
 
-            html2pdf().from(elementoCV).set(opciones).save();
+        // Descargar como PDF ajustado dinámicamente
+        document.getElementById("btn-exportar-pdf").addEventListener("click", function() {
+            const element = document.getElementById("cv-preview");
+            html2canvas(element, { scale: 2, useCORS: true }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF("p", "mm", "a4");
+                
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                
+                const imgWidth = pageWidth;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                pdf.save("curriculum-vacantes-peralta.pdf");
+            });
         });
     </script>
 </body>

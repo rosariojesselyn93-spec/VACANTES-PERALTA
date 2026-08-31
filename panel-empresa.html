@@ -6,15 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO Básico -->
     <title>Panel de Empresa | Vacantes Peralta</title>
     <meta name="robots" content="noindex, nofollow">
 
-    <!-- FAVICON -->
     <link rel="icon" type="image/jpeg" href="Logo-vacantes.png">
     <link rel="apple-touch-icon" href="Logo-vacantes.png">
 
-    <!-- Carga dinámica de CSS sin caché -->
     <script>
         var css = document.createElement('link');
         css.rel = 'stylesheet';
@@ -32,10 +29,11 @@
         }
 
         header .navbar {
-            max-width: 1000px !important;
+            max-width: 1300px !important;
             margin: 0 auto !important;
             width: 100% !important;
             box-sizing: border-box !important;
+            padding: 0 20px !important;
         }
 
         .panel-grid-principal {
@@ -164,7 +162,6 @@
             overflow-x: auto;
         }
 
-        /* Botones de formato */
         .toolbar button {
             background: #A05C3F;
             border: none;
@@ -215,16 +212,86 @@
         #btn-publicar:hover {
             background-color: #8C4F37;
         }
+
+        /* ESTILOS NUEVOS PARA EL LISTADO RESUMIDO DE VACANTES */
+        .vacante-item-resumido {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #F8F6F2;
+            border: 1px solid #D8CEC1;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .vacante-info-principal {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .vacante-titulo-puesto {
+            font-weight: 700;
+            color: #3D3028;
+            font-size: 1.05rem;
+        }
+
+        .vacante-fecha-pub {
+            font-size: 0.85rem;
+            color: #7A6E65;
+        }
+
+        .vacante-acciones-botones {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn-accion-panel {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s;
+        }
+
+        .btn-accion-panel:hover {
+            opacity: 0.85;
+        }
+
+        .btn-ver-completa {
+            background-color: #3D3028;
+            color: #ffffff;
+        }
+
+        .btn-cerrar-vacante {
+            background-color: #D97706;
+            color: #ffffff;
+        }
+
+        .btn-eliminar-vacante {
+            background-color: #DC2626;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
-    <!-- Loader Global -->
     <div id="global-loader">
         <div class="spinner"></div>
         <p>VACANTES PERALTA</p>
     </div>
 
-    <!-- Navegación Principal -->
     <header>
         <nav class="navbar">
             <div class="logo-header">
@@ -232,17 +299,17 @@
                 <h1>VACANTES PERALTA</h1>
             </div>
 
-          <a href="index.html">INICIO</a>
-    <a href="empresas.html">EMPRESAS</a>
-    <a href="contacto.html">CONTACTO</a>
-    <a href="blog.html">BLOG</a>
-    <a href="curriculum.html">CURRÍCULUM</a>
-</div>
+            <div class="nav-links">
+                <a href="index.html">INICIO</a>
+                <a href="empresas.html">EMPRESAS</a>
+                <a href="contacto.html">CONTACTO</a>
+                <a href="blog.html">BLOG</a>
+                <a href="curriculum.html">CURRÍCULUM</a>
+            </div>
         </nav>
     </header>
 
     <main>
-        <!-- Barra de Bienvenida del Usuario -->
         <div class="panel-header-usuario">
             <h2>Bienvenido, <span id="nombre-usuario">Cargando...</span></h2>
             <button id="btn-cerrar-sesion" type="button">Cerrar Sesión</button>
@@ -271,10 +338,9 @@
                         <option value="Remoto">Remoto</option>
                     </select>
 
-                                       <label for="horario">Horario:</label>
+                    <label for="horario">Horario:</label>
                     <input type="text" id="horario" placeholder="Ej: Lunes a Viernes, 9am - 6pm">
 
-                    <!-- Descripción -->
                     <label>Descripción:</label>
                     <div class="editor-container">
                         <div class="toolbar">
@@ -287,7 +353,6 @@
                         <div id="desc-editor" class="editable-div" contenteditable="true"></div>
                     </div>
 
-                    <!-- Requisitos -->
                     <label>Requisitos:</label>
                     <div class="editor-container">
                         <div class="toolbar">
@@ -300,7 +365,6 @@
                         <div id="req-editor" class="editable-div" contenteditable="true"></div>
                     </div>
 
-                    <!-- Beneficios -->
                     <label>Beneficios:</label>
                     <div class="editor-container">
                         <div class="toolbar">
@@ -330,15 +394,14 @@
         </div>
     </main>
 
-    <!-- Pie de Página -->
     <footer class="pie-pagina" style="margin-top: 50px;">
         <div class="contenido-footer" style="display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center;">
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 0.9rem;">
                 <p>&copy; 2026 VACANTES PERALTA. Todos los derechos reservados.</p>
                 <span style="color: #666;">|</span>
-                <a href="politica-privacidad.html" style="color: #007bff; text-decoration: none;">Política de Privacidad</a>
+                <a href="politica-privacidad.html" style="color: #fdfdfd; text-decoration: none;">Política de Privacidad</a>
                 <span style="color: #666;">|</span>
-                <a href="terminos-condiciones.html" style="color: #007bff; text-decoration: none;">Términos y Condiciones</a>
+                <a href="terminos-condiciones.html" style="color: #fdfdfd; text-decoration: none;">Términos y Condiciones</a>
             </div>
             <div class="redes-sociales">
                 <a href="https://www.facebook.com/61592374662642" target="_blank" rel="noopener noreferrer" class="btn-facebook">Facebook</a>
@@ -348,7 +411,6 @@
         </div>
     </footer>
 
-    <!-- Script de control básico -->
     <script>
         function formatText(command, targetId) {
             document.getElementById(targetId).focus();
@@ -356,7 +418,6 @@
         }
     </script>
 
-    <!-- Script Control del Loader -->
     <script>
       (function() {
         function quitarLoader() {

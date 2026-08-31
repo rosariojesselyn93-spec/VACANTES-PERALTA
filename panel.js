@@ -49,7 +49,7 @@ window.changeFontSize = function(size, targetId) {
     }
 };
 
-// 1. Función para listar las vacantes y procesar enlaces o correos de contacto
+// 1. Función para listar las vacantes de forma resumida y compacta
 async function cargarMisVacantes(uidEmpresa) {
     const contenedor = document.getElementById("lista-vacantes");
     if (!contenedor) return;
@@ -70,66 +70,59 @@ async function cargarMisVacantes(uidEmpresa) {
             const vacante = docSnap.data();
             const vacanteId = docSnap.id;
 
-            let estadoTexto = "Pendiente";
-            let estadoColor = "#ffc107"; // Amarillo
-            
-            if (vacante.estado === "publicada") {
-                estadoTexto = "Publicada";
-                estadoColor = "#28a745"; // Verde
-            } else if (vacante.estado === "cerrada") {
-                estadoTexto = "Cerrada";
-                estadoColor = "#6c757d"; // Gris
-            }
-
-            let contactoHTML = "";
-            const correoValor = vacante.correo || "N/A";
-
-            if (correoValor.startsWith("http://") || correoValor.startsWith("https://")) {
-                contactoHTML = `<a href="${correoValor}" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: underline; font-weight: bold;">Ir al formulario / enlace</a>`;
-            } else if (correoValor.includes("@")) {
-                contactoHTML = `<a href="mailto:${correoValor}" style="color: #007bff; text-decoration: none;">${correoValor}</a>`;
-            } else {
-                contactoHTML = correoValor;
+            // Formatear la fecha de creación de forma segura
+            let fechaFormateada = "Fecha no disponible";
+            if (vacante.fechaCreacion) {
+                if (typeof vacante.fechaCreacion.toDate === 'function') {
+                    fechaFormateada = vacante.fechaCreacion.toDate().toLocaleDateString('es-ES', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    });
+                } else {
+                    fechaFormateada = new Date(vacante.fechaCreacion).toLocaleDateString('es-ES');
+                }
             }
 
             const div = document.createElement("div");
-            div.className = "vacante-item";
-            div.style.cssText = "border: 1px solid #D8CEC1; padding: 20px; border-radius: 8px; margin-bottom: 15px; background: #F8F6F2;";
+            div.className = "vacante-item-resumido";
             
             div.innerHTML = `
-                <h4 style="margin: 0 0 10px 0; color: #A05C3F; font-size: 1.2rem;">${vacante.puesto} (${vacante.empresa || "Sin empresa"})</h4>
-                <p style="margin: 5px 0;"><strong>Ubicación:</strong> ${vacante.ubicacion || "No especificada"}</p>
-                <p style="margin: 5px 0;"><strong>Tipo de Contrato:</strong> ${vacante.tipoContrato || "No especificado"}</p>
-                <p style="margin: 5px 0;"><strong>Salario:</strong> ${vacante.salario || "A convenir"} | <strong>Horario:</strong> ${vacante.horario || "No especificado"}</p>
-                
-                <div style="margin: 10px 0;"><strong>Descripción:</strong> <div style="background:#fff; padding:10px; border-radius:6px; border:1px solid #D8CEC1; margin-top:4px;">${vacante.descripcion || "N/A"}</div></div>
-                <div style="margin: 10px 0;"><strong>Requisitos:</strong> <div style="background:#fff; padding:10px; border-radius:6px; border:1px solid #D8CEC1; margin-top:4px;">${vacante.requisitos || "N/A"}</div></div>
-                <div style="margin: 10px 0;"><strong>Beneficios:</strong> <div style="background:#fff; padding:10px; border-radius:6px; border:1px solid #D8CEC1; margin-top:4px;">${vacante.beneficios || "N/A"}</div></div>
-                
-                <p style="margin: 5px 0;"><strong>Contacto:</strong> ${contactoHTML}</p>
-                <p style="margin: 5px 0;">
-                    <strong>Estado:</strong> 
-                    <span style="color: ${estadoColor}; font-weight: bold; padding: 3px 8px; border-radius: 4px; background: #fff;">
-                        ${estadoTexto}
-                    </span>
-                </p>
-                <div style="margin-top: 15px;">
-                    ${vacante.estado !== "cerrada" ? `<button class="btn-cerrar" data-id="${vacanteId}" style="background: #ffc107; color: #000; padding: 6px 12px; margin-right: 5px; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">Cerrar</button>` : ''}
-                    <button class="btn-eliminar" data-id="${vacanteId}" style="background: #dc3545; color: white; padding: 6px 12px; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">Eliminar</button>
+                <div class="vacante-info-principal">
+                    <span class="vacante-titulo-puesto">${vacante.puesto || "Sin puesto"} <span style="font-weight: normal; color: #666;">(${vacante.empresa || "Sin empresa"})</span></span>
+                    <span class="vacante-fecha-pub">Publicada el: ${fechaFormateada}</span>
+                </div>
+                <div class="vacante-acciones-botones">
+                    <a href="detalle.html?id=${vacanteId}" class="btn-accion-panel btn-ver-completa" target="_blank" rel="noopener noreferrer">Ver</a>
+                    ${vacante.estado !== "cerrada" ? `<button type="button" class="btn-accion-panel btn-cerrar-vacante" data-id="${vacanteId}">Cerrar</button>` : ''}
+                    <button type="button" class="btn-accion-panel btn-eliminar-vacante" data-id="${vacanteId}">Eliminar</button>
                 </div>
             `;
 
-            div.querySelector(".btn-cerrar")?.addEventListener("click", async () => {
-                if (confirm("¿Marcar esta vacante como cerrada?")) {
-                    await updateDoc(doc(db, "vacantes", vacanteId), { estado: "cerrada" });
-                    cargarMisVacantes(uidEmpresa);
-                }
-            });
+            // Evento para cerrar vacante
+            const btnCerrar = div.querySelector(".btn-cerrar-vacante");
+            if (btnCerrar) {
+                btnCerrar.addEventListener("click", async () => {
+                    if (confirm("¿Marcar esta vacante como cerrada?")) {
+                        try {
+                            await updateDoc(doc(db, "vacantes", vacanteId), { estado: "cerrada" });
+                            cargarMisVacantes(uidEmpresa);
+                        } catch (err) {
+                            console.error("Error al cerrar vacante:", err);
+                        }
+                    }
+                });
+            }
 
-            div.querySelector(".btn-eliminar").addEventListener("click", async () => {
+            // Evento para eliminar vacante
+            div.querySelector(".btn-eliminar-vacante").addEventListener("click", async () => {
                 if (confirm("¿Eliminar permanentemente esta vacante?")) {
-                    await deleteDoc(doc(db, "vacantes", vacanteId));
-                    cargarMisVacantes(uidEmpresa);
+                    try {
+                        await deleteDoc(doc(db, "vacantes", vacanteId));
+                        cargarMisVacantes(uidEmpresa);
+                    } catch (err) {
+                        console.error("Error al eliminar vacante:", err);
+                    }
                 }
             });
 
@@ -200,7 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Lecturas seguras de los campos del formulario
             const inputEmpresa = document.getElementById("empresa");
             const inputPuesto = document.getElementById("puesto");
             const inputUbicacion = document.getElementById("ubicacion");
@@ -225,14 +217,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 beneficios: benEditor ? benEditor.innerHTML.trim() : "",
                 correo: inputCorreo ? inputCorreo.value.trim() : "",
                 uidEmpresa: user.uid,
-                estado: "pendiente",
+                estado: "publicada",
                 fechaCreacion: new Date()
             };
 
             try {
                 const docRef = await addDoc(collection(db, "vacantes"), nuevaVacante);
                 console.log("🎉 Vacante guardada con ID:", docRef.id);
-                alert("¡Vacante enviada con éxito! Está en revisión.");
+                alert("¡Vacante publicada con éxito!");
                 
                 formVacante.reset();
                 if (descEditor) descEditor.innerHTML = "";

@@ -48,25 +48,6 @@
             padding: 0 20px !important;
         }
     </style>
-    <style>
-        /* Forzar que el header cubra todo el ancho de la pantalla en el index */
-        header {
-            width: 100% !important;
-            max-width: 100% !important;
-            border-radius: 0 !important;
-            margin: 0 !important;
-            box-sizing: border-box !important;
-        }
-
-        /* Asegurar que la barra interna del header mantenga el contenido centrado */
-        header .navbar {
-            max-width: 1300px !important;
-            margin: 0 auto !important;
-            width: 100% !important;
-            box-sizing: border-box !important;
-            padding: 0 20px !important;
-        }
-    </style>
 </head>
 <body>
     <!-- Loader Global -->
@@ -83,13 +64,13 @@
                 <h1>VACANTES PERALTA</h1>
             </div>
 
-           <div class="nav-links">
-   <a href="index.html">INICIO</a>
-    <a href="empresas.html">EMPRESAS</a>
-    <a href="contacto.html">CONTACTO</a>
-    <a href="blog.html">BLOG</a>
-    <a href="curriculum.html">CURRÍCULUM</a>
-</div>
+            <div class="nav-links">
+                <a href="index.html">INICIO</a>
+                <a href="empresas.html">EMPRESAS</a>
+                <a href="contacto.html">CONTACTO</a>
+                <a href="blog.html">BLOG</a>
+                <a href="curriculum.html">CURRÍCULUM</a>
+            </div>
         </nav>
     </header>
 
@@ -99,22 +80,21 @@
             <p>Conectamos personas con empresas que buscan talento en Santo Domingo.</p>
 
             <div class="contenedor-buscador">
-          <div class="contenedor-buscador">
-    <!-- 1. Campo para puesto / palabra clave -->
-    <input type="text" id="buscador" placeholder="¿Qué trabajo buscas?">
-    
-    <!-- 3. Botón único -->
-    <button id="btnBuscar" class="btn-buscar">Buscar</button>
-</div>
+                <!-- Campo para puesto / palabra clave -->
+                <input type="text" id="buscador" placeholder="¿Qué trabajo buscas?">
+                
+                <!-- Botón único -->
+                <button id="btnBuscar" class="btn-buscar">Buscar</button>
+            </div>
         </section>
 
         <section class="seccion-vacantes">
-    <h2 class="titulo-seccion">Vacantes disponibles</h2>
-    <div id="vacantes-container" class="lista-vacantes"></div>
-    
-    <!-- El contenedor de paginación debe ser único y estar limpio -->
-    <div id="paginacion-container" class="paginacion-numerada"></div>   
-</section>
+            <h2 class="titulo-seccion">Vacantes disponibles</h2>
+            <div id="vacantes-container" class="lista-vacantes"></div>
+            
+            <!-- El contenedor de paginación debe ser único y estar limpio -->
+            <div id="paginacion-container" class="paginacion-numerada"></div>   
+        </section>
     </main>
 
     <footer class="pie-pagina" style="margin-top: 50px;">
