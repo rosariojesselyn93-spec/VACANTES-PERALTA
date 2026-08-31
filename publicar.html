@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4865552593602117"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar vacante | VACANTES PERALTA</title>
+
+    <!-- FAVICON (Icono de la pestaña) -->
+    <link rel="icon" type="image/jpeg" href="Logo-vacantes.png">
+    <link rel="apple-touch-icon" href="Logo-vacantes.png">
+
+    <!-- Carga dinámica de CSS sin caché -->
+    <script>
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'style.css?v=' + new Date().getTime();
+        document.head.appendChild(css);
+    </script>
+</head>
+
+<body>
+    <!-- Loader Global -->
+    <div id="global-loader">
+        <div class="spinner"></div>
+        <p>VACANTES PERALTA</p>
+    </div>
+
+    <!-- Navegación Principal -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-header">
+                <img src="Logo-vacantes.png" alt="Vacantes Peralta">
+                <h1>VACANTES PERALTA</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">INICIO</a>
+                <a href="empresas.html">EMPRESAS</a>
+                <a href="contacto.html">CONTACTO</a>
+            </div>
+        </nav>
+    </header>
+
+    <main style="max-width: 800px; margin: 0 auto; padding: 30px 15px;">
+        <section class="form-card" style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <h2>Publica tu vacante</h2>
+            <p class="subtitle" style="margin-bottom: 25px; color: #666;">
+                Completa los datos de la oportunidad laboral que deseas enviar a revisión.
+            </p>
+
+            <form id="formVacante">
+                <div class="campo-form">
+                    <label for="empresa">Nombre de la empresa</label>
+                    <input type="text" id="empresa" placeholder="Ejemplo: Empresa Peralta" required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="puesto">Nombre de la posición</label>
+                    <input type="text" id="puesto" placeholder="Ejemplo: Auxiliar administrativo" required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="ubicacion">Ubicación / Provincia:</label>
+                    <select id="ubicacion" required>
+                        <option value="" disabled selected>Selecciona una provincia...</option>
+                        <option value="Distrito Nacional">Distrito Nacional</option>
+                        <option value="Azua">Azua</option>
+                        <option value="Bahoruco">Bahoruco</option>
+                        <option value="Barahona">Barahona</option>
+                        <option value="Dajabón">Dajabón</option>
+                        <option value="Duarte">Duarte</option>
+                        <option value="El Seibo">El Seibo</option>
+                        <option value="Elías Piña">Elías Piña</option>
+                        <option value="Espaillat">Espaillat</option>
+                        <option value="Hato Mayor">Hato Mayor</option>
+                        <option value="Hermanas Mirabal">Hermanas Mirabal</option>
+                        <option value="Independencia">Independencia</option>
+                        <option value="La Altagracia">La Altagracia</option>
+                        <option value="La Romana">La Romana</option>
+                        <option value="La Vega">La Vega</option>
+                        <option value="María Trinidad Sánchez">María Trinidad Sánchez</option>
+                        <option value="Monseñor Nouel">Monseñor Nouel</option>
+                        <option value="Monte Cristi">Monte Cristi</option>
+                        <option value="Monte Plata">Monte Plata</option>
+                        <option value="Pedernales">Pedernales</option>
+                        <option value="Peravia">Peravia</option>
+                        <option value="Puerto Plata">Puerto Plata</option>
+                        <option value="Samaná">Samaná</option>
+                        <option value="San Cristóbal">San Cristóbal</option>
+                        <option value="San José de Ocoa">San José de Ocoa</option>
+                        <option value="San Juan">San Juan</option>
+                        <option value="San Pedro de Macorís">San Pedro de Macorís</option>
+                        <option value="Sánchez Ramírez">Sánchez Ramírez</option>
+                        <option value="Santiago">Santiago</option>
+                        <option value="Santiago Rodríguez">Santiago Rodríguez</option>
+                        <option value="Santo Domingo">Santo Domingo</option>
+                        <option value="Valverde">Valverde</option>
+                        <option value="Remoto">Remoto</option>
+                    </select>
+                </div>
+
+                <div class="campo-form">
+                    <label for="salario">Salario:</label>
+                    <input type="text" id="salario" placeholder="Ej: RD$ 25,000 / A convenir" required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="horario">Horario:</label>
+                    <input type="text" id="horario" placeholder="Ej: L-V 8:00 AM - 5:00 PM" required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="contrato">Tipo de contrato</label>
+                    <select id="contrato" required>
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="Tiempo completo">Tiempo completo</option>
+                        <option value="Medio tiempo">Medio tiempo</option>
+                        <option value="Temporal">Temporal</option>
+                        <option value="Pasantías">Pasantías</option>
+                        <option value="Remoto">Remoto</option>
+                    </select>
+                </div>
+
+                <div class="campo-form">
+                    <label for="descripcion">Descripción de la vacante</label>
+                    <textarea id="descripcion" rows="4" placeholder="Describe las funciones principales del puesto" required></textarea>
+                </div>
+
+                <div class="campo-form">
+                    <label for="requisitos">Requisitos</label>
+                    <textarea id="requisitos" rows="3" placeholder="Indica los requisitos necesarios para aplicar" required></textarea>
+                </div>
+
+                <div class="campo-form">
+                    <label for="beneficios">Beneficios</label>
+                    <textarea id="beneficios" rows="3" placeholder="Ejemplo: Beneficios de ley, seguro médico, transporte" required></textarea>
+                </div>
+
+                <div class="campo-form">
+                    <label for="correo">Correo o contacto para aplicar</label>
+                    <input type="email" id="correo" placeholder="correo@empresa.com" required>
+                </div>
+
+                <button type="submit" class="btn-submit" style="width: 100%; padding: 12px; background: #007bff; color: #fff; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 1rem;">
+                    Enviar vacante
+                </button>
+            </form>
+        </section>
+    </main>
+
+  <footer class="pie-pagina" style="margin-top: 50px;">
+        <div class="contenido-footer" style="display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center;">
+            
+            <!-- Derechos reservados y Enlaces legales -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 0.9rem;">
+                <p>&copy; 2026 VACANTES PERALTA. Todos los derechos reservados.</p>
+                <span style="color: #666;">|</span>
+                <a href="politica-privacidad.html" style="color: #007bff; text-decoration: none; transition: color 0.2s;">Política de Privacidad</a>
+                <span style="color: #666;">|</span>
+                <a href="terminos-condiciones.html" style="color: #007bff; text-decoration: none; transition: color 0.2s;">Términos y Condiciones</a>
+            </div>
+
+            <!-- Redes Sociales -->
+            <div class="redes-sociales">
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/61592374662642" target="_blank" rel="noopener noreferrer" class="btn-facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                    <span>Facebook</span>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/vacantesperalta/" target="_blank" rel="noopener noreferrer" class="btn-instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <span>Instagram</span>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/company/vacantes-peralta/" target="_blank" rel="noopener noreferrer" class="btn-linkedin">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+
+        </div>
+    </footer>
+    <!-- Script para ejecutar la lógica de publicar vacante -->
+    <script>
+        (function(){
+            var s = document.createElement('script');
+            s.type = 'module';
+            s.src = 'publicar.js?v=' + new Date().getTime();
+            document.body.appendChild(s);
+        })();
+    </script>
+
+    <!-- Script de control del loader -->
+    <script>
+        (function() {
+            function quitarLoader() {
+                var loader = document.getElementById("global-loader");
+                if (loader) {
+                    loader.classList.add("hidden");
+                    loader.style.display = "none";
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", quitarLoader);
+            window.addEventListener("load", quitarLoader);
+            setTimeout(quitarLoader, 800);
+        })();
+    </script>
+</body>
+</html>

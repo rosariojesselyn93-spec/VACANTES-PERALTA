@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4865552593602117" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Básico -->
+    <title id="page-title">Artículo | Vacantes Peralta</title>
+    <meta name="robots" content="index, follow">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/jpeg" href="Logo-vacantes.png">
+    <link rel="apple-touch-icon" href="Logo-vacantes.png">
+
+    <!-- Carga dinámica de CSS sin caché -->
+    <script>
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'style.css?v=' + new Date().getTime();
+        document.head.appendChild(css);
+    </script>
+
+    <style>
+        header {
+            width: 100% !important;
+            max-width: 100% !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        header .navbar {
+            max-width: 1300px !important;
+            margin: 0 auto !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            padding: 0 20px !important;
+        }
+
+        .main-post {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            min-height: 60vh;
+        }
+
+        .volver-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .volver-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .post-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .post-fecha {
+            font-size: 0.9rem;
+            color: #007bff;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .post-titulo {
+            font-size: 2.2rem;
+            color: #212529;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .post-contenido {
+            color: #495057;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .post-contenido p {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loader Global -->
+    <div id="global-loader">
+        <div class="spinner"></div>
+        <p>VACANTES PERALTA</p>
+    </div>
+
+    <!-- Navegación Principal -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-header">
+                <img src="Logo-vacantes.png" alt="Vacantes Peralta">
+                <h1>VACANTES PERALTA</h1>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">INICIO</a>
+                <a href="empresas.html">EMPRESAS</a>
+                <a href="contacto.html">CONTACTO</a>
+                <a href="blog.html">BLOG</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido Principal del Artículo -->
+    <main class="main-post">
+        <a href="blog.html" class="volver-link">&larr; Volver al Blog</a>
+
+        <article class="post-card" id="post-container">
+            <span id="post-fecha" class="post-fecha"></span>
+            <h1 id="post-titulo" class="post-titulo">Cargando artículo...</h1>
+            <div id="post-contenido" class="post-contenido">
+                <p>Por favor espere mientras cargamos la información completa de esta publicación.</p>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pie-pagina" style="margin-top: 50px;">
+        <div class="contenido-footer" style="display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 0.9rem;">
+                <p>&copy; 2026 VACANTES PERALTA. Todos los derechos reservados.</p>
+                <span style="color: #666;">|</span>
+                <a href="politica-privacidad.html" style="color: #fdfdfd; text-decoration: none;">Política de Privacidad</a>
+                <span style="color: #666;">|</span>
+                <a href="terminos-condiciones.html" style="color: #fdfdfd; text-decoration: none;">Términos y Condiciones</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script del Loader -->
+    <script>
+      (function() {
+        function quitarLoader() {
+          var loader = document.getElementById("global-loader");
+          if (loader) {
+            loader.classList.add("hidden");
+            loader.style.display = "none";
+          }
+        }
+        document.addEventListener("DOMContentLoaded", quitarLoader);
+        window.addEventListener("load", quitarLoader);
+        setTimeout(quitarLoader, 800);
+      })();
+    </script>
+
+    <!-- Script para Cargar el Artículo desde Firebase Firestore -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA-5cjJsbQ0dtIcrKLlcC62_8oaO0MhplI",
+            authDomain: "vacantes-peralta.firebaseapp.com",
+            databaseURL: "https://vacantes-peralta-default-rtdb.firebaseio.com",
+            projectId: "vacantes-peralta",
+            storageBucket: "vacantes-peralta.firebasestorage.app",
+            messagingSenderId: "451345536120",
+            appId: "1:451345536120:web:33906131388814e0b4898d",
+            measurementId: "G-HD6HH4HC8T"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function cargarDetalleArticulo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const idArticulo = urlParams.get('id');
+
+            const contenedor = document.getElementById('post-container');
+            const tituloEl = document.getElementById('post-titulo');
+            const fechaEl = document.getElementById('post-fecha');
+            const contenidoEl = document.getElementById('post-contenido');
+            const pageTitleEl = document.getElementById('page-title');
+
+            if (!idArticulo) {
+                tituloEl.innerText = "Artículo no encontrado";
+                contenidoEl.innerHTML = "<p>No se especificó un artículo válido para mostrar.</p>";
+                return;
+            }
+
+            try {
+                // Buscamos directamente en la colección 'articulos' usando el ID recibido en la URL
+                const docRef = doc(db, "articulos", idArticulo);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+
+                    tituloEl.innerText = data.titulo || "Sin título";
+                    pageTitleEl.innerText = `${data.titulo || 'Artículo'} | Vacantes Peralta`;
+
+                    if (data.fecha && typeof data.fecha.toDate === 'function') {
+                        const fechaObj = data.fecha.toDate();
+                        fechaEl.innerText = fechaObj.toLocaleDateString('es-DO', { year: 'numeric', month: 'long', day: 'numeric' });
+                    } else {
+                        fechaEl.style.display = 'none';
+                    }
+
+                    // Si guardaste el contenido con etiquetas HTML, se renderizará perfectamente aquí
+                    contenidoEl.innerHTML = data.contenido || "<p>Este artículo no tiene contenido detallado todavía.</p>";
+
+                } else {
+                    tituloEl.innerText = "Artículo no disponible";
+                    contenidoEl.innerHTML = "<p>El artículo que buscas pudo haber sido eliminado o no existe.</p>";
+                }
+
+            } catch (error) {
+                console.error("Error al obtener el artículo:", error);
+                tituloEl.innerText = "Ocurrió un error";
+                contenidoEl.innerHTML = "<p>No pudimos cargar el artículo en este momento. Inténtalo de nuevo más tarde.</p>";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", cargarDetalleArticulo);
+    </script>
+</body>
+</html>

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog de Carrera Profesional - Vacantes Peralta</title>
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/jpeg" href="Logo-vacantes.png">
+    <link rel="apple-touch-icon" href="Logo-vacantes.png">
+
+    <style>
+        :root {
+            --bg-main: #f9f8f6;
+            --card-bg: #ffffff;
+            --text-main: #2d241e;
+            --text-muted: #6b635b;
+            --brown-dark: #3b271c;
+            --brown-medium: #965230;
+            --border-color: #e5deda;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* ENCABEZADO DE ANCHO COMPLETO FORZADO */
+        header {
+            background-color: #965230 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 100 !important;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            max-width: 1350px !important;
+            width: 100% !important;
+            margin: 0 auto !important;
+            padding: 15px 30px !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+
+        .logo-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-header img {
+            height: 42px;
+            width: 42px;
+            object-fit: contain;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .logo-header h1 {
+            font-size: 1.35rem;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* Contenedor principal de la página */
+        .page-wrapper {
+            max-width: 1350px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* HERO HEADER ESTILO EJECUTIVO MARRÓN */
+        .blog-hero {
+            background: linear-gradient(135deg, #3b271c 0%, #5a3d2b 100%);
+            border-radius: 20px;
+            padding: 50px 20px;
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(59, 39, 28, 0.15);
+        }
+
+        .blog-hero h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .blog-hero p {
+            font-size: 1.05rem;
+            color: #dcd6d0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ESTRUCTURA DE 2 COLUMNAS */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 968px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        /* CUADRÍCULA DE ARTÍCULOS */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 25px;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+        }
+
+        .blog-img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .blog-meta-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .blog-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--brown-dark);
+            background: #f4efed;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .blog-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .blog-card h3 {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            line-height: 1.4;
+            font-weight: 700;
+        }
+
+        .blog-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+
+        .btn-leer {
+            color: var(--brown-dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s;
+        }
+
+        .btn-leer:hover {
+            gap: 10px;
+            opacity: 0.8;
+        }
+
+        /* SIDEBAR LATERAL */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .sidebar-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+        .sidebar-box h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .search-group {
+            display: flex;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .search-group input {
+            flex-grow: 1;
+            border: none;
+            padding: 10px 14px;
+            font-size: 0.9rem;
+            outline: none;
+            color: var(--text-main);
+        }
+
+        .search-group button {
+            background: #965230;
+            border: none;
+            color: white;
+            padding: 0 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-group button:hover {
+            background: #7a4225;
+        }
+
+        .categories-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .categories-list li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.2s;
+        }
+
+        .categories-list li a:hover {
+            color: #965230;
+            font-weight: 600;
+        }
+
+        .subscribe-box {
+            background: linear-gradient(135deg, #b06943 0%, #c87e51 100%);
+            border-radius: 14px;
+            padding: 25px;
+            color: white;
+        }
+
+        .subscribe-box h4 {
+            color: white;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .subscribe-box p {
+            font-size: 0.85rem;
+            color: #dcd6d0;
+            margin-bottom: 15px;
+        }
+
+        .subscribe-input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: none;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        .subscribe-btn {
+            width: 100%;
+            background: #8c6248;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .subscribe-btn:hover {
+            background: #a37254;
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            color: var(--text-muted);
+            font-size: 1rem;
+            background: var(--card-bg);
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* ESTILOS DEL PIE DE PÁGINA */
+        .pie-pagina {
+            background-color: var(--brown-dark);
+            color: #dcd6d0;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contenido-footer {
+            max-width: 1350px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: #dcd6d0;
+        }
+
+        .footer-links a {
+            color: #dcd6d0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .redes-sociales {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .redes-sociales a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .redes-sociales a:hover {
+            background: var(--brown-medium);
+            border-color: var(--brown-medium);
+        }
+
+        /* ===================================================== */
+        /* DISEÑO RESPONSIVO PARA MÓVILES (INTEGRADO)             */
+        /* ===================================================== */
+        @media screen and (max-width: 768px) {
+            header, .navbar {
+                flex-direction: column !important;
+                align-items: center !important;
+                padding: 10px !important;
+                text-align: center !important;
+                height: auto !important;
+            }
+
+            .logo-header {
+                flex-direction: column !important;
+                gap: 8px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .logo-header h1 {
+                font-size: 1.25rem !important;
+            }
+
+            .nav-links {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: center !important;
+                flex-wrap: wrap !important;
+                gap: 14px !important;
+                margin: 5px 0 0 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            .nav-links a {
+                font-size: 14px !important;
+                padding: 4px 8px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader Global -->
+    <div id="global-loader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.3s ease;">
+        <div class="spinner" style="border: 4px solid #f3f3f3; border-top: 4px solid #965230; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 10px;"></div>
+        <p style="font-family: sans-serif; font-weight: bold; color: #3b271c;">VACANTES PERALTA</p>
+    </div>
+    <style>
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+
+    <!-- Navegación Principal -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-header">
+                <img src="Logo-vacantes.png" alt="Vacantes Peralta">
+                <h1>VACANTES PERALTA</h1>
+            </div>
+
+           <div class="nav-links">
+   <a href="index.html">INICIO</a>
+    <a href="empresas.html">EMPRESAS</a>
+    <a href="contacto.html">CONTACTO</a>
+    <a href="blog.html">BLOG</a>
+    <a href="curriculum.html">CURRÍCULUM</a>
+</div>
+        </nav>
+    </header>
+
+    <div class="page-wrapper">
+        <section class="blog-hero">
+            <h1>Blog de Carrera Profesional</h1>
+            <p>Consejos, tendencias y recursos para impulsar tu desarrollo profesional y alcanzar tus metas.</p>
+        </section>
+
+        <div class="content-layout">
+            <main>
+                <h3 class="section-title">Artículos recientes</h3>
+                <div id="blog-container" class="blog-grid">
+                    <div class="empty-state">Cargando artículos...</div>
+                </div>
+            </main>
+
+            <aside class="sidebar">
+                <div class="sidebar-box">
+                    <h4>Buscar artículos</h4>
+                    <div class="search-group">
+                        <input type="text" id="input-buscar" placeholder="Escribe una palabra clave...">
+                        <button id="btn-buscar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sidebar-box">
+                    <h4>Categorías</h4>
+                    <ul class="categories-list">
+                        <li><a href="#" class="filtro-cat" data-cat="todos">📂 Todas las categorías</a></li>
+                        <li><a href="#" class="filtro-cat" data-cat="Desarrollo profesional">💼 Desarrollo profesional</a></li>
+                        <li><a href="#" class="filtro-cat" data-cat="Habilidades">🎯 Habilidades</a></li>
+                        <li><a href="#" class="filtro-cat" data-cat="Entrevistas">💬 Entrevistas</a></li>
+                        <li><a href="#" class="filtro-cat" data-cat="Liderazgo">🚀 Liderazgo</a></li>
+                        <li><a href="#" class="filtro-cat" data-cat="Tendencias">📈 Tendencias laborales</a></li>
+                    </ul>
+                </div>
+
+                <div class="subscribe-box">
+                    <h4>Recibe contenido exclusivo</h4>
+                    <p>Suscríbete a nuestro boletín y recibe consejos directos en tu correo.</p>
+                    <input type="email" placeholder="Tu correo electrónico" class="subscribe-input" id="email-suscriptor">
+                    <button class="subscribe-btn" onclick="alert('¡Gracias por suscribirte!')">Suscribirme</button>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA-5cjJsbQ0dtIcrKLlcC62_8oaO0MhplI",
+            authDomain: "vacantes-peralta.firebaseapp.com",
+            projectId: "vacantes-peralta",
+            storageBucket: "vacantes-peralta.firebasestorage.app",
+            messagingSenderId: "451345536120",
+            appId: "1:451345536120:web:33906131388814e0b4898d",
+            measurementId: "G-HD6HH4HC8T"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let todosLosArticulos = [];
+
+        async function cargarArticulosPublicos() {
+            const container = document.getElementById("blog-container");
+            if (!container) return;
+
+            try {
+                const q = query(collection(db, "articulos"), orderBy("fecha", "desc"));
+                const querySnapshot = await getDocs(q);
+
+                todosLosArticulos = [];
+                querySnapshot.forEach((docSnap) => {
+                    todosLosArticulos.push({ id: docSnap.id, ...docSnap.data() });
+                });
+
+                renderizarArticulos(todosLosArticulos);
+
+            } catch (error) {
+                console.error("Error al cargar los artículos:", error);
+                container.innerHTML = `<div class="empty-state">Error al cargar los artículos del blog.</div>`;
+            } finally {
+                const loader = document.getElementById("global-loader");
+                if (loader) {
+                    loader.style.opacity = "0";
+                    setTimeout(() => loader.style.display = "none", 300);
+                }
+            }
+        }
+
+        function renderizarArticulos(articulos) {
+            const container = document.getElementById("blog-container");
+            container.innerHTML = "";
+
+            if (articulos.length === 0) {
+                container.innerHTML = `<div class="empty-state">No se encontraron artículos disponibles.</div>`;
+                return;
+            }
+
+            articulos.forEach((data) => {
+                const fechaFormateada = data.fecha ? new Date(data.fecha).toLocaleDateString() : '';
+
+                const card = document.createElement("div");
+                card.className = "blog-card";
+                card.innerHTML = `
+                    <img src="${data.imagen || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&auto=format&fit=crop&q=60'}" alt="${data.titulo}" class="blog-img">
+                    <div class="blog-content">
+                        <div class="blog-meta-top">
+                            <span class="blog-category">${data.categoria || 'Desarrollo profesional'}</span>
+                            <span class="blog-date">${fechaFormateada}</span>
+                        </div>
+                        <h3>${data.titulo}</h3>
+                        <p>${data.resumen || ''}</p>
+                        <a href="articulo.html?id=${data.id}" class="btn-leer">Leer más →</a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        document.querySelectorAll(".filtro-cat").forEach(enlace => {
+            enlace.addEventListener("click", (e) => {
+                e.preventDefault();
+                const categoria = e.target.getAttribute("data-cat");
+                if (categoria === "todos") {
+                    renderizarArticulos(todosLosArticulos);
+                } else {
+                    const filtrados = todosLosArticulos.filter(art => art.categoria === categoria);
+                    renderizarArticulos(filtrados);
+                }
+            });
+        });
+
+        const inputBuscar = document.getElementById("input-buscar");
+        const btnBuscar = document.getElementById("btn-buscar");
+
+        function ejecutarBusqueda() {
+            const texto = inputBuscar.value.toLowerCase().trim();
+            const filtrados = todosLosArticulos.filter(art => 
+                (art.titulo && art.titulo.toLowerCase().includes(texto)) || 
+                (art.resumen && art.resumen.toLowerCase().includes(texto))
+            );
+            renderizarArticulos(filtrados);
+        }
+
+        btnBuscar.addEventListener("click", ejecutarBusqueda);
+        inputBuscar.addEventListener("keyup", (e) => {
+            if (e.key === "Enter") ejecutarBusqueda();
+        });
+
+        document.addEventListener("DOMContentLoaded", cargarArticulosPublicos);
+    </script>
+
+    <footer class="pie-pagina">
+        <div class="contenido-footer">
+            <div class="footer-links">
+                <p>&copy; 2026 VACANTES PERALTA. Todos los derechos reservados.</p>
+                <span style="color: #6b635b;">|</span>
+                <a href="politica-privacidad.html">Política de Privacidad</a>
+                <span style="color: #6b635b;">|</span>
+                <a href="terminos-condiciones.html">Términos y Condiciones</a>
+            </div>
+
+            <div class="redes-sociales">
+                <a href="https://www.facebook.com/61592374662642" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://www.instagram.com/vacantesperalta/" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.linkedin.com/company/vacantes-peralta/" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

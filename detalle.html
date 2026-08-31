@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4865552593602117"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de la Vacante | VACANTES PERALTA</title>
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/jpeg" href="Logo-vacantes.png">
+    <link rel="apple-touch-icon" href="Logo-vacantes.png">
+
+    <!-- Carga dinámica de CSS sin caché -->
+    <script>
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'style.css?v=' + new Date().getTime();
+        document.head.appendChild(css);
+    </script>
+    <style>
+        /* Forzar que el header cubra todo el ancho de la pantalla en el index */
+        header {
+            width: 100% !important;
+            max-width: 100% !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        /* Asegurar que la barra interna del header mantenga el contenido centrado */
+        header .navbar {
+            max-width: 1300px !important;
+            margin: 0 auto !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            padding: 0 20px !important;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <!-- Loader Global -->
+    <div id="global-loader">
+        <div class="spinner"></div>
+        <p>VACANTES PERALTA</p>
+    </div>
+
+    <!-- Navegación Principal -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-header">
+                <img src="Logo-vacantes.png" alt="Vacantes Peralta">
+                <h1>VACANTES PERALTA</h1>
+            </div>
+
+         <a href="index.html">INICIO</a>
+    <a href="empresas.html">EMPRESAS</a>
+    <a href="contacto.html">CONTACTO</a>
+    <a href="blog.html">BLOG</a>
+    <a href="curriculum.html">CURRÍCULUM</a>
+</div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detalle-vacante">
+
+            <a href="index.html" class="volver">
+                ← Volver a las vacantes
+            </a>
+
+            <h2 id="puesto">Cargando vacante...</h2>
+
+            <!-- Grid de Casillas / Tarjetas con id estricto para cada dato -->
+            <div class="info-grid">
+                
+                <div class="info-card">
+                    <span>Empresa</span>
+                    <strong id="empresa">---</strong>
+                </div>
+
+                <div class="info-card">
+                    <span>Ubicación</span>
+                    <strong id="ubicacion">---</strong>
+                </div>
+
+                <div class="info-card">
+                    <span>Salario</span>
+                    <strong id="salario">---</strong>
+                </div>
+
+                <div class="info-card">
+                    <span>Horario</span>
+                    <strong id="horario">---</strong>
+                </div>
+
+                <div class="info-card">
+                    <span>Tipo de Contrato</span>
+                    <strong id="contrato">---</strong>
+                </div>
+
+                <div class="info-card">
+                    <span>Publicado</span>
+                    <strong id="fechaPublicacion">---</strong>
+                </div>
+
+            </div>
+
+            <!-- Secciones Detalladas de Texto Largo -->
+            <div class="seccion-detalle">
+                <h3>Descripción del Puesto</h3>
+                <p id="descripcion">---</p>
+            </div>
+
+            <div class="seccion-detalle">
+                <h3>Requisitos</h3>
+                <p id="requisitos">---</p>
+            </div>
+
+            <div class="seccion-detalle">
+                <h3>Beneficios</h3>
+                <p id="beneficios">---</p>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="contenedor-boton">
+
+                <a id="aplicar" class="btn-aplicar" href="#" target="_blank">
+                    Aplicar ahora
+                </a>
+
+                <!-- Botón Unificado de Compartir -->
+                <div class="contenedor-compartir">
+                    <button type="button" id="btnCompartirMenu" class="btn-compartir-principal" onclick="toggleMenuCompartir()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                        Compartir
+                    </button>
+
+                    <!-- Menú desplegable -->
+                    <div id="menuCompartir" class="menu-desplegable-compartir">
+                        <a id="opcionWhatsapp" class="opcion-menu" href="#" target="_blank" rel="noopener noreferrer">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#25d366"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                            WhatsApp
+                        </a>
+
+                        <button type="button" onclick="copiarEnlaceDetalle()" class="opcion-menu">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            <span id="textoCopiar">Copiar enlace</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Aviso de postulación -->
+            <section class="postulacion" style="margin-top: 20px;">
+                <p style="font-size: 0.9rem; color: #444; background-color: #eef6ff; padding: 12px; border-radius: 6px; border-left: 4px solid #007bff; margin-bottom: 15px;">
+                    📌 <strong>Nota:</strong> Al hacer clic en "Aplicar ahora" se abrirá tu correo o el portal de la empresa. 
+                    Recuerda adjuntar tu Curriculum Vitae (CV) antes de enviar el mensaje.
+                </p>
+            </section>
+
+        </section>
+    </main>
+
+  <footer class="pie-pagina" style="margin-top: 50px;">
+        <div class="contenido-footer" style="display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center;">
+            
+            <!-- Derechos reservados y Enlaces legales -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 0.9rem;">
+                <p>&copy; 2026 VACANTES PERALTA. Todos los derechos reservados.</p>
+                <span style="color: #666;">|</span>
+                <a href="politica-privacidad.html" style="color: #007bff; text-decoration: none; transition: color 0.2s;">Política de Privacidad</a>
+                <span style="color: #666;">|</span>
+                <a href="terminos-condiciones.html" style="color: #007bff; text-decoration: none; transition: color 0.2s;">Términos y Condiciones</a>
+            </div>
+
+            <!-- Redes Sociales -->
+            <div class="redes-sociales">
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/61592374662642" target="_blank" rel="noopener noreferrer" class="btn-facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                    <span>Facebook</span>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/vacantesperalta/" target="_blank" rel="noopener noreferrer" class="btn-instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <span>Instagram</span>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/company/vacantes-peralta/" target="_blank" rel="noopener noreferrer" class="btn-linkedin">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Control del Loader -->
+    <script>
+      (function() {
+        function quitarLoader() {
+          var loader = document.getElementById("global-loader");
+          if (loader) {
+            loader.classList.add("hidden");
+            loader.style.display = "none";
+          }
+        }
+
+        document.addEventListener("DOMContentLoaded", quitarLoader);
+        window.addEventListener("load", quitarLoader);
+        setTimeout(quitarLoader, 800);
+      })();
+    </script>
+
+    <!-- Carga dinámica de JS -->
+    <script>
+        (function(){
+            var s = document.createElement('script');
+            s.type = 'module';
+            s.src = 'detalle.js?v=' + new Date().getTime();
+            document.body.appendChild(s);
+        })();
+    </script>
+
+</body>
+</html>

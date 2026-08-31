@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artículo - Vacantes Peralta</title>
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/jpeg" href="Logo-vacantes.png">
+    <link rel="apple-touch-icon" href="Logo-vacantes.png">
+
+    <style>
+        :root {
+            --bg-main: #f9f8f6;
+            --card-bg: #ffffff;
+            --text-main: #2d241e;
+            --text-muted: #6b635b;
+            --brown-dark: #3b271c;
+            --brown-medium: #965230;
+            --border-color: #e5deda;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* ENCABEZADO DE ANCHO COMPLETO */
+        header {
+            background-color: var(--brown-medium) !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 100 !important;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            max-width: 1350px !important;
+            width: 100% !important;
+            margin: 0 auto !important;
+            padding: 15px 30px !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+
+        .logo-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-header img {
+            height: 42px;
+            width: 42px;
+            object-fit: contain;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .logo-header h1 {
+            font-size: 1.35rem;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* DISEÑO DE 2 COLUMNAS (CONTENEDOR PRINCIPAL) */
+        .page-wrapper {
+            max-width: 1350px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .content-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 968px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* TARJETA DEL ARTÍCULO (IZQUIERDA) */
+        .article-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(59, 39, 28, 0.04);
+        }
+
+        .btn-volver {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-volver:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        .article-category {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--brown-dark);
+            background: #f4efed;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        #titulo-articulo {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .article-image-container {
+            width: 100%;
+            max-height: 400px;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .article-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 30px 0;
+        }
+
+        /* ESTILOS DEL CONTENIDO DEL ARTÍCULO */
+        #contenido-articulo {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            line-height: 1.8;
+        }
+
+        #contenido-articulo p {
+            margin-bottom: 1.2rem;
+        }
+
+        #contenido-articulo h1, 
+        #contenido-articulo h2, 
+        #contenido-articulo h3 {
+            color: var(--brown-dark);
+            margin-top: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        #contenido-articulo ul, 
+        #contenido-articulo ol {
+            padding-left: 25px;
+            margin-bottom: 1.2rem;
+        }
+
+        #contenido-articulo li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* SIDEBAR LATERAL (DERECHA) */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .sidebar-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+        .sidebar-box h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .search-group {
+            display: flex;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .search-group input {
+            flex-grow: 1;
+            border: none;
+            padding: 10px 14px;
+            font-size: 0.9rem;
+            outline: none;
+            color: var(--text-main);
+        }
+
+        .search-group button {
+            background: var(--brown-medium);
+            border: none;
+            color: white;
+            padding: 0 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-group button:hover {
+            background: #7a4225;
+        }
+
+        .categories-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .categories-list li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.2s;
+        }
+
+        .categories-list li a:hover {
+            color: var(--brown-medium);
+            font-weight: 600;
+        }
+
+        /* WIDGET DE ARTÍCULOS RECIENTES EN LA SIDEBAR */
+        .recent-articles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .recent-item {
+            display: flex;
+            gap: 12px;
+            text-decoration: none;
+            align-items: center;
+            transition: opacity 0.2s;
+        }
+
+        .recent-item:hover {
+            opacity: 0.8;
+        }
+
+        .recent-item img {
+            width: 65px;
+            height: 65px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .recent-info h5 {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .recent-info span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* CAJA DE SUSCRIPCIÓN EN SIDEBAR */
+        .subscribe-box {
+            background: linear-gradient(135deg, #b06943 0%, #c87e51 100%);
+            border-radius: 14px;
+            padding: 25px;
+            color: white;
+        }
+
+        .subscribe-box h4 {
+            color: white;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .subscribe-box p {
+            font-size: 0.85rem;
+            color: #dcd6d0;
+            margin-bottom: 15px;
+        }
+
+        .subscribe-input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: none;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        .subscribe-btn {
+            width: 100%;
+            background: #8c6248;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .subscribe-btn:hover {
+            background: #a37254;
+        }
+
+        /* PIE DE PÁGINA */
+        .pie-pagina {
+            background-color: var(--brown-dark);
+            color: #dcd6d0;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+
+        .contenido-footer {
+            max-width: 1350px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: #dcd6d0;
+        }
+
+        .footer-links a {
+            color: #dcd6d0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .redes-sociales {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .redes-sociales a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .redes-sociales a:hover {
+            background: var(--brown-medium);
+            border-color: var(--brown-medium);
+        }
+    </style>
+</head>
+<body class="pagina-articulo">
+    <!-- Loader Global -->
+    <div id="global-loader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.3s ease;">
+        <div class="spinner" style="border: 4px solid #f3f3f3; border-top: 4px solid #965230; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 10px;"></div>
+        <p style="font-family: sans-serif; font-weight: bold; color: #3b271c;">VACANTES PERALTA</p>
+    </div>
+    <style>
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+
+    <!-- ENCABEZADO Y BARRA DE NAVEGACIÓN -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-header">
+                <img src="Logo-vacantes.png" alt="Vacantes Peralta">
+                <h1>VACANTES PERALTA</h1>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">INICIO</a>
+                <a href="empresas.html">EMPRESAS</a>
+                <a href="contacto.html">CONTACTO</a>
+                <a href="blog.html" class="active">BLOG</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL DE 2 COLUMNAS -->
+    <div class="page-wrapper">
+        <div class="content-layout">
+            
+            <!-- COLUMNA IZQUIERDA: ARTÍCULO PRINCIPAL -->
+            <main>
+                <article class="article-card">
+                    <a href="blog.html" class="btn-volver">← Volver al blog</a>
+                    
+                    <span id="categoria-articulo" class="article-category" style="display: none;"></span>
+                    
+                    <h1 id="titulo-articulo">Cargando artículo...</h1>
+                    
+                    <div id="fecha-articulo" class="article-meta"></div>
+                    
+                    <div id="contenedor-imagen-principal" class="article-image-container" style="display: none;">
+                        <img id="imagen-articulo" src="" alt="Imagen del artículo">
+                    </div>
+
+                    <hr>
+                    
+                    <div id="contenido-articulo">
+                        <p style="text-align: center; color: var(--text-muted); font-style: italic;">Cargando contenido...</p>
+                    </div>
+                </article>
+            </main>
+
+            <!-- COLUMNA DERECHA: SIDEBAR IDÉNTICA AL BLOG -->
+            <aside class="sidebar">
+                <div class="sidebar-box">
+                    <h4>Buscar en el blog</h4>
+                    <div class="search-group">
+                        <input type="text" id="input-buscar" placeholder="Buscar artículos...">
+                        <button id="btn-buscar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sidebar-box">
+                    <h4>Categorías</h4>
+                    <ul class="categories-list">
+                        <li><a href="blog.html?cat=todos">📂 Todas las categorías</a></li>
+                        <li><a href="blog.html?cat=Desarrollo profesional">💼 Desarrollo profesional</a></li>
+                        <li><a href="blog.html?cat=Entrevistas">🎯 Entrevistas</a></li>
+                        <li><a href="blog.html?cat=Currículum y CV">📄 Currículum y CV</a></li>
+                        <li><a href="blog.html?cat=Habilidades">🎯 Habilidades</a></li>
+                        <li><a href="blog.html?cat=Consejos laborales">💡 Consejos laborales</a></li>
+                    </ul>
+                </div>
+
+                <!-- ARTÍCULOS RECIENTES -->
+                <div class="sidebar-box">
+                    <h4>Artículos recientes</h4>
+                    <div id="sidebar-recientes" class="recent-articles-list">
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Cargando...</span>
+                    </div>
+                </div>
+
+                <div class="subscribe-box">
+                    <h4>Recibe contenido exclusivo</h4>
+                    <p>Suscríbete a nuestro boletín y recibe consejos directos en tu correo.</p>
+                    <input type="email" placeholder="Tu correo electrónico" class="subscribe-input" id="email-suscriptor">
+                    <button class="subscribe-btn" onclick="alert('¡Gracias por suscribirte!')">Suscribirme</button>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <!-- SCRIPT DE CARGA DESDE FIREBASE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA-5cjJsbQ0dtIcrKLlcC62_8oaO0MhplI",
+            authDomain: "vacantes-peralta.firebaseapp.com",
+            projectId: "vacantes-peralta",
+            storageBucket: "vacantes-peralta.firebasestorage.app",
+            messagingSenderId: "451345536120",
+            appId: "1:451345536120:web:33906131388814e0b4898d",
+            measurementId: "G-HD6HH4HC8T"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function cargarDatosPagina() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get("id");
+            const containerLoader = document.getElementById("global-loader");
+
+            try {
+                // 1. Cargar el artículo principal si hay ID
+                if (id) {
+                    const docRef = doc(db, "articulos", id);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        document.getElementById("titulo-articulo").textContent = data.titulo || "Sin título";
+                        
+                        if (data.fecha) {
+                            const fechaFormateada = new Date(data.fecha).toLocaleDateString();
+                            document.getElementById("fecha-articulo").textContent = `Publicado el ${fechaFormateada}`;
+                        }
+
+                        if (data.categoria) {
+                            const catSpan = document.getElementById("categoria-articulo");
+                            catSpan.textContent = data.categoria;
+                            catSpan.style.display = "inline-block";
+                        }
+
+                        if (data.imagen) {
+                            const imgElem = document.getElementById("imagen-articulo");
+                            imgElem.src = data.imagen;
+                            imgElem.alt = data.titulo || "Imagen";
+                            document.getElementById("contenedor-imagen-principal").style.display = "block";
+                        }
+
+                        document.getElementById("contenido-articulo").innerHTML = data.contenido || data.resumen || "<p>Sin contenido disponible.</p>";
+                    } else {
+                        document.getElementById("titulo-articulo").textContent = "Artículo no disponible";
+                        document.getElementById("contenido-articulo").innerHTML = "<p>El artículo que buscas ya no existe o fue eliminado.</p>";
+                    }
+                } else {
+                    document.getElementById("titulo-articulo").textContent = "Artículo no especificado";
+                    document.getElementById("contenido-articulo").innerHTML = "<p>Por favor, selecciona un artículo desde el blog.</p>";
+                }
+
+                // 2. Cargar Artículos Recientes para la Sidebar derecha
+                const qRecientes = query(collection(db, "articulos"), orderBy("fecha", "desc"), limit(4));
+                const snapshotRecientes = await getDocs(qRecientes);
+                const contenedorRecientes = document.getElementById("sidebar-recientes");
+                contenedorRecientes.innerHTML = "";
+
+                snapshotRecientes.forEach((docSnap) => {
+                    const art = docSnap.data();
+                    const artId = docSnap.id;
+                    if (artId !== id) {
+                        const fechaReciente = art.fecha ? new Date(art.fecha).toLocaleDateString() : '';
+                        const item = document.createElement("a");
+                        item.href = `articulo.html?id=${artId}`;
+                        item.className = "recent-item";
+                        item.innerHTML = `
+                            <img src="${art.imagen || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=200&auto=format&fit=crop&q=60'}" alt="${art.titulo}">
+                            <div class="recent-info">
+                                <h5>${art.titulo}</h5>
+                                <span>${fechaReciente}</span>
+                            </div>
+                        `;
+                        contenedorRecientes.appendChild(item);
+                    }
+                });
+
+            } catch (error) {
+                console.error("Error al cargar los datos:", error);
+            } finally {
+                if (containerLoader) {
+                    containerLoader.style.opacity = "0";
+                    setTimeout(() => containerLoader.style.display = "none", 300);
+                }
+            }
+        }
+
+        // Funcionalidad de búsqueda en la barra lateral
+        document.getElementById("btn-buscar").addEventListener("click", () => {
+            const texto = document.getElementById("input-buscar").value.trim();
+            if (texto) {
+                window.location.href = `blog.html?busqueda=${encodeURIComponent(texto)}`;
+            }
+        });
+
+        document.getElementById("input-buscar").addEventListener("keyup", (e) => {
+            if (e.key === "Enter") {
+                const texto = e.target.value.trim();
+                if (texto) {
+                    window.location.href = `blog.html?busqueda=${encodeURIComponent(texto)}`;
+                }
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", cargarDatosPagina);
+    </script>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="pie-pagina">
+        <div class="contenido-footer">
+            <div class="footer-links">
+                <p>&copy; 2026 VACANTES PERALTA. Todos los derechos reservados.</p>
+                <span style="color: #6b635b;">|</span>
+                <a href="politica-privacidad.html">Política de Privacidad</a>
+                <span style="color: #6b635b;">|</span>
+                <a href="terminos-condiciones.html">Términos y Condiciones</a>
+            </div>
+
+            <div class="redes-sociales">
+                <a href="https://www.facebook.com/61592374662642" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                    <span>Facebook</span>
+                </a>
+
+                <a href="https://www.instagram.com/vacantesperalta/" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <span>Instagram</span>
+                </a>
+
+                <a href="https://www.linkedin.com/company/vacantes-peralta/" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+</html>
