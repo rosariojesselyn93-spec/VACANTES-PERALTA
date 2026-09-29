@@ -434,5 +434,64 @@
     </script>
 
     <script type="module" src="panel.js?v=2026"></script>
+    <!-- MODAL DE CONFIGURACIÓN DE FORMULARIO -->
+<div id="modal-formulario" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; overflow-y: auto; padding: 20px; box-sizing: border-box;">
+    <div style="background: #ffffff; border-radius: 16px; max-width: 700px; width: 100%; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border-top: 5px solid #A05C3F; max-height: 90vh; display: flex; flex-direction: column;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 id="modal-titulo-vacante" style="color: #A05C3F; margin: 0; font-size: 1.3rem;">Configurar Formulario de Solicitud</h3>
+            <button type="button" id="btn-cerrar-modal" style="background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: #7A6E65;">&times;</button>
+        </div>
+
+        <div style="overflow-y: auto; flex: 1; padding-right: 5px;">
+            <p style="color: #3D3028; font-size: 0.95rem; margin-bottom: 20px;">
+                Elige cómo deseas recibir las solicitudes para esta vacante. Puedes usar nuestra plantilla prehecha o personalizar tus propias preguntas.
+            </p>
+
+            <!-- Selector de tipo de formulario -->
+            <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                <label style="flex: 1; background: #F8F6F2; border: 2px solid #D8CEC1; padding: 15px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+                    <input type="radio" name="tipo_form" value="prehecho" checked style="accent-color: #A05C3F;">
+                    <div>
+                        <strong style="color: #3D3028; display: block;">Formulario Prehecho</strong>
+                        <span style="font-size: 0.85rem; color: #7A6E65;">Incluye datos personales, cédula, nivel académico, historial laboral y expectativas.</span>
+                    </div>
+                </label>
+
+                <label style="flex: 1; background: #F8F6F2; border: 2px solid #D8CEC1; padding: 15px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+                    <input type="radio" name="tipo_form" value="personalizado" style="accent-color: #A05C3F;">
+                    <div>
+                        <strong style="color: #3D3028; display: block;">Crear/Personalizar</strong>
+                        <span style="font-size: 0.85rem; color: #7A6E65;">Añade tus propias preguntas específicas para este puesto.</span>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Contenedor si elige personalizado -->
+            <div id="seccion-personalizada" style="display: none; background: #F8F6F2; padding: 20px; border-radius: 10px; border: 1px solid #D8CEC1; margin-bottom: 20px;">
+                <h4 style="color: #3D3028; margin-top: 0; margin-bottom: 10px;">Constructor de Preguntas</h4>
+                <div id="lista-preguntas-extras" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;">
+                    <!-- Aquí se añadirán dinámicamente las preguntas extra -->
+                </div>
+                <button type="button" id="btn-agregar-pregunta" style="background: #3D3028; color: #fff; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 600;">+ Añadir otra pregunta</button>
+            </div>
+
+            <!-- Enlace público generado -->
+            <div style="background: #EFECE6; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <label style="font-weight: 600; color: #3D3028; font-size: 0.9rem; display: block; margin-bottom: 5px;">Enlace para compartir con candidatos:</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="input-enlace-publico" readonly style="flex: 1; padding: 10px; background: #fff; border: 1px solid #D8CEC1; border-radius: 6px; color: #3D3028; font-size: 0.9rem;" value="https://vacantesperalta.com/aplicar/vacante-id">
+                    <button type="button" id="btn-copiar-enlace" style="background: #A05C3F; color: #fff; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold;">Copiar</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; border-top: 1px solid #D8CEC1; padding-top: 15px;">
+            <button type="button" id="btn-cancelar-modal" style="background: #D8CEC1; color: #3D3028; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;">Cancelar</button>
+            <button type="button" id="btn-guardar-config-form" style="background: #A05C3F; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;">Guardar Configuración</button>
+        </div>
+
+    </div>
+</div>
 </body>
 </html>

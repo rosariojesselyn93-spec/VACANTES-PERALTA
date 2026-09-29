@@ -12,7 +12,8 @@ import {
     addDoc, 
     doc,
     updateDoc,
-    deleteDoc 
+    deleteDoc,
+    getDoc 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const auth = getAuth();
@@ -49,6 +50,90 @@ window.changeFontSize = function(size, targetId) {
     }
 };
 
+// Funciones globales para el manejo del Modal de Formulario de Solicitud
+window.abrirConfiguracionFormulario = async function(idVacante, puesto) {
+    const modal = document.getElementById('modal-formulario');
+    if (!modal) return;
+
+    document.getElementById('modal-titulo-vacante').textContent = `Configurar Formulario: ${puesto}`;
+    document.getElementById('input-enlace-publico').value = `${window.location.origin}/aplicar.html?id=${idVacante}`;
+    modal.style.display = 'flex';
+
+    // Cargar configuración existente si la hay en Firestore
+    try {
+        const vacanteDoc = await getDoc(doc(db, "vacantes", idVacante));
+        if (vacanteDoc.exists()) {
+            const data = vacanteDoc.data();
+            const tipoFormConfig = data.tipoFormulario || "prehecho";
+            
+            const radioPrehecho = document.querySelector('input[name="tipo_form"][value="prehecho"]');
+            const radioPersonalizado = document.querySelector('input[name="tipo_form"][value="personalizado"]');
+            const seccionPersonalizada = document.getElementById('seccion-personalizada');
+            const listaPreguntasExtras = document.getElementById('lista-preguntas-extras');
+
+            if (tipoFormConfig === "personalizado") {
+                if (radioPersonalizado) radioPersonalizado.checked = true;
+                if (seccionPersonalizada) seccionPersonalizada.style.display = 'block';
+                
+                if (listaPreguntasExtras) {
+                    listaPreguntasExtras.innerHTML = "";
+                    if (data.preguntasPersonalizadas && Array.isArray(data.preguntasPersonalizadas)) {
+                        data.preguntasPersonalizadas.forEach(p => {
+                            agregarFilaPregunta(p);
+                        });
+                    }
+                }
+            } else {
+                if (radioPrehecho) radioPrehecho.checked = true;
+                if (seccionPersonalizada) seccionPersonalizada.style.display = 'none';
+                if (listaPreguntasExtras) listaPreguntasExtras.innerHTML = "";
+            }
+
+            // Guardar ID activo en el botón de guardar del modal
+            const btnGuardarModal = document.getElementById('btn-guardar-config-form');
+            if (btnGuardarModal) {
+                btnGuardarModal.setAttribute('data-vacante-id', idVacante);
+            }
+        }
+    } catch (err) {
+        console.error("Error al cargar configuración del formulario:", err);
+    }
+};
+
+window.verSolicitudes = function(idVacante) {
+    // Redirige a la vista donde la empresa evaluará las respuestas de los candidatos
+    window.location.href = `solicitudes.html?id=${idVacante}`;
+};
+
+// Función auxiliar para agregar campos de preguntas personalizadas dinámicamente
+function agregarFilaPregunta(preguntaData = null) {
+    const lista = document.getElementById('lista-preguntas-extras');
+    if (!lista) return;
+
+    const div = document.createElement('div');
+    div.className = 'item-pregunta-custom';
+    div.style.cssText = "display: flex; gap: 10px; align-items: center; background: #fff; padding: 10px; border-radius: 6px; border: 1px solid #D8CEC1;";
+
+    const textoVal = preguntaData ? (preguntaData.texto || "") : "";
+    const tipoVal = preguntaData ? (preguntaData.tipo || "text") : "text";
+
+    div.innerHTML = `
+        <input type="text" class="input-texto-pregunta" placeholder="Escribe tu pregunta aquí..." value="${textoVal}" style="flex: 1; padding: 8px; border: 1px solid #D8CEC1; border-radius: 4px; font-size: 0.9rem;">
+        <select class="select-tipo-pregunta" style="padding: 8px; border: 1px solid #D8CEC1; border-radius: 4px; font-size: 0.9rem; background: #F8F6F2;">
+            <option value="text" ${tipoVal === 'text' ? 'selected' : ''}>Respuesta Corta</option>
+            <option value="textarea" ${tipoVal === 'textarea' ? 'selected' : ''}>Respuesta Larga</option>
+            <option value="select" ${tipoVal === 'select' ? 'selected' : ''}>Selección (Sí/No)</option>
+        </select>
+        <button type="button" class="btn-eliminar-pregunta" style="background: #DC2626; color: #fff; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;">&times;</button>
+    `;
+
+    div.querySelector('.btn-eliminar-pregunta').addEventListener('click', () => {
+        div.remove();
+    });
+
+    lista.appendChild(div);
+}
+
 // 1. Función para listar las vacantes de forma resumida y compacta
 async function cargarMisVacantes(uidEmpresa) {
     const contenedor = document.getElementById("lista-vacantes");
@@ -70,17 +155,22 @@ async function cargarMisVacantes(uidEmpresa) {
             const vacante = docSnap.data();
             const vacanteId = docSnap.id;
 
-            // Formatear la fecha de creación de forma segura
-            let fechaFormateada = "Fecha no disponible";
+            // CORRECCIÓN DE FECHA: Forzamos formato estricto español (DD/MM/YYYY) para evitar errores de interpretación
+            let fechaFormateada = "Sin fecha";
             if (vacante.fechaCreacion) {
+                let fechaObj;
                 if (typeof vacante.fechaCreacion.toDate === 'function') {
-                    fechaFormateada = vacante.fechaCreacion.toDate().toLocaleDateString('es-ES', {
+                    fechaObj = vacante.fechaCreacion.toDate();
+                } else {
+                    fechaObj = new Date(vacante.fechaCreacion);
+                }
+
+                if (!isNaN(fechaObj)) {
+                    fechaFormateada = fechaObj.toLocaleDateString('es-ES', {
                         day: '2-digit',
                         month: '2-digit',
                         year: 'numeric'
                     });
-                } else {
-                    fechaFormateada = new Date(vacante.fechaCreacion).toLocaleDateString('es-ES');
                 }
             }
 
@@ -93,6 +183,8 @@ async function cargarMisVacantes(uidEmpresa) {
                     <span class="vacante-fecha-pub">Publicada el: ${fechaFormateada}</span>
                 </div>
                 <div class="vacante-acciones-botones">
+                    <button type="button" class="btn-accion-panel" style="background-color: #2563EB; color: #fff;" onclick="abrirConfiguracionFormulario('${vacanteId}', '${vacante.puesto ? vacante.puesto.replace(/'/g, "\\'") : "Vacante"}')">Formulario</button>
+                    <button type="button" class="btn-accion-panel" style="background-color: #059669; color: #fff;" onclick="verSolicitudes('${vacanteId}')">Solicitudes</button>
                     <a href="detalle.html?id=${vacanteId}" class="btn-accion-panel btn-ver-completa" target="_blank" rel="noopener noreferrer">Ver</a>
                     ${vacante.estado !== "cerrada" ? `<button type="button" class="btn-accion-panel btn-cerrar-vacante" data-id="${vacanteId}">Cerrar</button>` : ''}
                     <button type="button" class="btn-accion-panel btn-eliminar-vacante" data-id="${vacanteId}">Eliminar</button>
@@ -141,15 +233,14 @@ onAuthStateChanged(auth, async (user) => {
 
     if (user) {
         try {
-            const empresaRef = collection(db, "empresa");
-            const qEmpresa = query(empresaRef, where("email", "==", user.email));
-            const querySnapshot = await getDocs(qEmpresa);
+            // Consultamos la colección "usuarios" para obtener la información de la empresa de forma segura
+            const userDocRef = doc(db, "usuarios", user.uid);
+            const userDocSnap = await getDoc(userDocRef);
 
-            if (!querySnapshot.empty) {
-                const empresaDoc = querySnapshot.docs[0];
-                const data = empresaDoc.data();
+            if (userDocSnap.exists()) {
+                const data = userDocSnap.data();
                 if (bienvenidaEl) {
-                    bienvenidaEl.innerText = data.nombreEmpresa || data.nombre || user.email;
+                    bienvenidaEl.innerText = data.nombre || user.email;
                 }
             } else {
                 if (bienvenidaEl) bienvenidaEl.innerText = user.email;
@@ -176,6 +267,95 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.location.href = "login.html";
             } catch (error) {
                 console.error("Error al cerrar sesión:", error);
+            }
+        });
+    }
+
+    // Manejo de eventos del Modal de Formulario
+    const modalFormulario = document.getElementById('modal-formulario');
+    const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+    const btnCancelarModal = document.getElementById('btn-cancelar-modal');
+    const btnCopiarEnlace = document.getElementById('btn-copiar-enlace');
+    const btnAgregarPregunta = document.getElementById('btn-agregar-pregunta');
+    const btnGuardarConfigForm = document.getElementById('btn-guardar-config-form');
+
+    if (btnCerrarModal && modalFormulario) {
+        btnCerrarModal.addEventListener('click', () => {
+            modalFormulario.style.display = 'none';
+        });
+    }
+
+    if (btnCancelarModal && modalFormulario) {
+        btnCancelarModal.addEventListener('click', () => {
+            modalFormulario.style.display = 'none';
+        });
+    }
+
+    // Alternar vista de formulario prehecho vs personalizado
+    document.querySelectorAll('input[name="tipo_form"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            const seccionPersonalizada = document.getElementById('seccion-personalizada');
+            if (seccionPersonalizada) {
+                if (e.target.value === 'personalizado') {
+                    seccionPersonalizada.style.display = 'block';
+                } else {
+                    seccionPersonalizada.style.display = 'none';
+                }
+            }
+        });
+    });
+
+    if (btnAgregarPregunta) {
+        btnAgregarPregunta.addEventListener('click', () => {
+            agregarFilaPregunta();
+        });
+    }
+
+    if (btnCopiarEnlace) {
+        btnCopiarEnlace.addEventListener('click', () => {
+            const inputEnlace = document.getElementById('input-enlace-publico');
+            if (inputEnlace) {
+                inputEnlace.select();
+                navigator.clipboard.writeText(inputEnlace.value);
+                alert('¡Enlace copiado al portapapeles!');
+            }
+        });
+    }
+
+    if (btnGuardarConfigForm) {
+        btnGuardarConfigForm.addEventListener('click', async () => {
+            const vacanteId = btnGuardarConfigForm.getAttribute('data-vacante-id');
+            if (!vacanteId) {
+                alert("No se ha seleccionado ninguna vacante válida.");
+                return;
+            }
+
+            const tipoFormSeleccionado = document.querySelector('input[name="tipo_form"]:checked')?.value || "prehecho";
+            let preguntasPersonalizadas = [];
+
+            if (tipoFormSeleccionado === "personalizado") {
+                const filas = document.querySelectorAll('.item-pregunta-custom');
+                filas.forEach(fila => {
+                    const texto = fila.querySelector('.input-texto-pregunta')?.value.trim() || "";
+                    const tipo = fila.querySelector('.select-tipo-pregunta')?.value || "text";
+                    if (texto !== "") {
+                        preguntasPersonalizadas.push({ texto, tipo });
+                    }
+                });
+            }
+
+            try {
+                const vacanteRef = doc(db, "vacantes", vacanteId);
+                await updateDoc(vacanteRef, {
+                    tipoFormulario: tipoFormSeleccionado,
+                    preguntasPersonalizadas: preguntasPersonalizadas
+                });
+
+                alert("¡Configuración de formulario guardada con éxito!");
+                if (modalFormulario) modalFormulario.style.display = 'none';
+            } catch (err) {
+                console.error("Error al guardar la configuración del formulario:", err);
+                alert("Hubo un error al guardar la configuración.");
             }
         });
     }
@@ -217,14 +397,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 beneficios: benEditor ? benEditor.innerHTML.trim() : "",
                 correo: inputCorreo ? inputCorreo.value.trim() : "",
                 uidEmpresa: user.uid,
-                estado: "publicada",
+                estado: "pendiente",
+                tipoFormulario: "prehecho",
+                preguntasPersonalizadas: [],
                 fechaCreacion: new Date()
             };
 
             try {
                 const docRef = await addDoc(collection(db, "vacantes"), nuevaVacante);
                 console.log("🎉 Vacante guardada con ID:", docRef.id);
-                alert("¡Vacante publicada con éxito!");
+                alert("¡Vacante publicada y enviada a revisión con éxito!");
                 
                 formVacante.reset();
                 if (descEditor) descEditor.innerHTML = "";

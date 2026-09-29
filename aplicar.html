@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Empleo | Vacantes Peralta</title>
+    <link rel="icon" type="image/jpeg" href="Logo-vacantes.png">
+    
+    <style>
+        body { font-family: 'Verdana', sans-serif; background-color: #F8F6F2; color: #3D3028; margin: 0; padding: 20px; }
+        .container { max-width: 700px; background: #ffffff; margin: 40px auto; padding: 30px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05); border-top: 4px solid #A05C3F; box-sizing: border-box; }
+        h2 { color: #A05C3F; margin-top: 0; }
+        h3.seccion-titulo { color: #A05C3F; border-bottom: 2px solid #EFECE6; padding-bottom: 5px; margin-top: 30px; font-size: 1.1rem; }
+        .info-puesto { background: #EFECE6; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-top: 15px; margin-bottom: 5px; font-size: 0.95rem; }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea { width: 100%; padding: 12px 14px; background-color: #F8F6F2; border: 1px solid #D8CEC1; border-radius: 8px; color: #3D3028; font-size: 1rem; box-sizing: border-box; outline: none; }
+        input:focus, select:focus, textarea:focus { background-color: #ffffff; border-color: #A05C3F; box-shadow: 0 0 0 3px rgba(160, 92, 63, 0.15); }
+        textarea { resize: vertical; min-height: 80px; }
+        button[type="submit"] { width: 100%; background-color: #A05C3F; color: #ffffff; border: none; padding: 14px; font-size: 1.1rem; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 30px; transition: background 0.2s; }
+        button[type="submit"]:hover { background-color: #8C4F37; }
+        .seccion-personalizada-bloque { background: #FAF8F5; border: 1px dashed #A05C3F; padding: 15px; border-radius: 8px; margin-top: 15px; }
+        .campo-condicional { background: #FAF8F5; padding: 12px; border-radius: 8px; border-left: 3px solid #A05C3F; margin-top: 10px; display: none; }
+        
+        /* Tabla de Idiomas */
+        .tabla-idiomas { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
+        .tabla-idiomas th, .tabla-idiomas td { border: 1px solid #D8CEC1; padding: 8px; text-align: center; }
+        .tabla-idiomas th { background-color: #EFECE6; color: #3D3028; }
+        .tabla-idiomas td select { padding: 6px; font-size: 0.9rem; background-color: #fff; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Formulario de Solicitud de Empleo</h2>
+        <div id="detalle-vacante-info" class="info-puesto">
+            <p>Cargando información de la vacante...</p>
+        </div>
+
+        <form id="form-solicitud-candidato">
+            <!-- Datos Personales -->
+            <h3 class="seccion-titulo">1. Datos Personales</h3>
+            <label for="nombre">Nombres y Apellidos:</label>
+            <input type="text" id="nombre">
+
+            <label for="cedula">Número de Cédula:</label>
+            <input type="text" id="cedula">
+
+            <label for="nacionalidad">Nacionalidad:</label>
+            <input type="text" id="nacionalidad">
+
+            <label for="estadoCivil">Estado Civil:</label>
+            <select id="estadoCivil">
+                <option value="">Selecciona una opción</option>
+                <option value="Soltera/o">Soltera/o</option>
+                <option value="Casada/o">Casada/o</option>
+                <option value="Unión libre">Unión libre</option>
+            </select>
+
+            <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fechaNacimiento">
+
+            <label for="telefono">Número de Teléfono:</label>
+            <input type="tel" id="telefono">
+
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo">
+
+            <label for="direccion">Dirección de Residencia:</label>
+            <input type="text" id="direccion">
+
+            <label for="comoSeEntero">¿Cómo se enteró de la vacante?:</label>
+            <select id="comoSeEntero">
+                <option value="">Selecciona una opción</option>
+                <option value="Redes Sociales">Redes Sociales</option>
+                <option value="Bolsa de Empleo">Bolsa de Empleo</option>
+                <option value="Referido">Referido</option>
+                <option value="Página Web">Página Web</option>
+                <option value="Otro">Otro</option>
+            </select>
+
+            <label for="licencia">¿Posees licencia de conducir?:</label>
+            <select id="licencia">
+                <option value="">Selecciona una opción</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+
+            <div id="bloque-tipo-licencia" class="campo-condicional">
+                <label for="tipoLicencia">Indique la categoría o tipo de licencia:</label>
+                <input type="text" id="tipoLicencia" placeholder="Ej: Categoría 2 / Motocicletas">
+            </div>
+
+            <!-- 2. Información de contacto de emergencia -->
+            <h3 class="seccion-titulo">2. Contacto de Emergencia</h3>
+            <label for="nombreEmergencia">Nombre del contacto de emergencia:</label>
+            <input type="text" id="nombreEmergencia">
+
+            <label for="parentescoEmergencia">Parentesco:</label>
+            <input type="text" id="parentescoEmergencia">
+
+            <label for="telefonoEmergencia">Teléfono de emergencia:</label>
+            <input type="tel" id="telefonoEmergencia">
+
+            <!-- 3. Formación académica -->
+            <h3 class="seccion-titulo">3. Formación Académica</h3>
+            <label for="nivelAcademico">Nivel académico alcanzado:</label>
+            <select id="nivelAcademico">
+                <option value="">Selecciona una opción</option>
+                <option value="Primaria">Primaria</option>
+                <option value="Secundaria">Secundaria</option>
+                <option value="Técnico">Técnico</option>
+                <option value="Universitario">Universitario</option>
+            </select>
+
+            <label for="estadoAcademico">Estado académico:</label>
+            <select id="estadoAcademico">
+                <option value="">Selecciona una opción</option>
+                <option value="Completada">Completada</option>
+                <option value="En curso">En curso</option>
+                <option value="Incompleta">Incompleta</option>
+            </select>
+
+            <div id="bloque-horario-academico" class="campo-condicional">
+                <label for="horarioAcademico">Indique su horario de estudio:</label>
+                <input type="text" id="horarioAcademico" placeholder="Ej: Sábados de 8:00 AM a 4:00 PM">
+            </div>
+
+            <label for="cursosRelevantes">Cursos y capacitaciones relevantes:</label>
+            <textarea id="cursosRelevantes"></textarea>
+
+            <!-- Idiomas (Solo Español e Inglés) -->
+            <h3 class="seccion-titulo">Idiomas</h3>
+            <table class="tabla-idiomas">
+                <thead>
+                    <tr>
+                        <th>Idioma</th>
+                        <th>Hablado</th>
+                        <th>Escrito</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Español</td>
+                        <td>
+                            <select id="espaniolHablado">
+                                <option value="N/A">Seleccionar</option>
+                                <option value="Básico">Básico</option>
+                                <option value="Intermedio">Intermedio</option>
+                                <option value="Avanzado">Avanzado / Nativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select id="espaniolEscrito">
+                                <option value="N/A">Seleccionar</option>
+                                <option value="Básico">Básico</option>
+                                <option value="Intermedio">Intermedio</option>
+                                <option value="Avanzado">Avanzado / Nativo</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Inglés</td>
+                        <td>
+                            <select id="inglesHablado">
+                                <option value="N/A">Seleccionar</option>
+                                <option value="Básico">Básico</option>
+                                <option value="Intermedio">Intermedio</option>
+                                <option value="Avanzado">Avanzado / Nativo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select id="inglesEscrito">
+                                <option value="N/A">Seleccionar</option>
+                                <option value="Básico">Básico</option>
+                                <option value="Intermedio">Intermedio</option>
+                                <option value="Avanzado">Avanzado / Nativo</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 5. Situación laboral actual y anterior -->
+            <h3 class="seccion-titulo">5. Situación Laboral</h3>
+            <label for="trabajandoActual">¿Está trabajando actualmente?:</label>
+            <select id="trabajandoActual">
+                <option value="">Selecciona una opción</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+
+            <div id="bloque-info-laboral" class="campo-condicional">
+                <label for="empresaActual">Empresa actual:</label>
+                <input type="text" id="empresaActual">
+
+                <label for="puestoActual">Puesto actual:</label>
+                <input type="text" id="puestoActual">
+
+                <label for="tiempoPuesto">Tiempo en el puesto:</label>
+                <input type="text" id="tiempoPuesto" placeholder="Ej: 1 año y 6 meses">
+
+                <label for="motivoBusqueda">¿Por qué está buscando una nueva oportunidad?:</label>
+                <textarea id="motivoBusqueda"></textarea>
+            </div>
+
+            <label for="cuandoComenzar">¿Cuándo podría comenzar?:</label>
+            <input type="text" id="cuandoComenzar" placeholder="Ej: Inmediato / Dos semanas de aviso">
+
+            <label for="salarioAspira">Salario al que aspira:</label>
+            <input type="text" id="salarioAspira" placeholder="Ej: RD$ 40,000">
+
+            <!-- Empresa Anterior -->
+            <h3 class="seccion-titulo">Empresa Anterior</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div>
+                    <label for="antEmpresa">Nombre de la Empresa:</label>
+                    <input type="text" id="antEmpresa">
+                </div>
+                <div>
+                    <label for="antTelefono">Teléfono:</label>
+                    <input type="tel" id="antTelefono">
+                </div>
+                <div>
+                    <label for="antFecha">Fecha de Empleo:</label>
+                    <input type="text" id="antFecha" placeholder="Ej: 2022 - 2025">
+                </div>
+                <div>
+                    <label for="antJefe">Jefe Inmediato:</label>
+                    <input type="text" id="antJefe">
+                </div>
+                <div>
+                    <label for="antIndole">Índole del negocio:</label>
+                    <input type="text" id="antIndole">
+                </div>
+                <div>
+                    <label for="antPosicion">Posición:</label>
+                    <input type="text" id="antPosicion">
+                </div>
+                <div>
+                    <label for="antSalario">Salario Final:</label>
+                    <input type="text" id="antSalario">
+                </div>
+            </div>
+            <label for="antRazon">Razón de Salida:</label>
+            <textarea id="antRazon"></textarea>
+
+            <!-- 7. Transporte y movilidad y Disponibilidad -->
+            <h3 class="seccion-titulo">7. Transporte y Movilidad / Disponibilidad</h3>
+            <label for="tipoTransporte">¿Cómo se trasladaría al trabajo?:</label>
+            <select id="tipoTransporte">
+                <option value="">Selecciona una opción</option>
+                <option value="Transporte público">Transporte público</option>
+                <option value="Motor">Motor</option>
+                <option value="Vehículo propio">Vehículo propio</option>
+                <option value="Transporte familiar">Transporte familiar</option>
+                <option value="Otro">Otro</option>
+            </select>
+
+            <label for="facilidadTransporte">¿Tiene facilidad de transporte para llegar puntualmente?:</label>
+            <select id="facilidadTransporte">
+                <option value="">Selecciona una opción</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+
+            <label for="trabajarFeriados">¿Está dispuesto a trabajar feriados y fines de semana?:</label>
+            <select id="trabajarFeriados">
+                <option value="">Selecciona una opción</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+
+            <label for="horarioRotativo">¿Puede trabajar horario rotativo?:</label>
+            <select id="horarioRotativo">
+                <option value="">Selecciona una opción</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+
+            <!-- Pregunta condicional de familiar en la compañía -->
+            <label for="tieneFamiliar">¿Tiene usted algún Familiar o Conocido en esta compañía?:</label>
+            <select id="tieneFamiliar">
+                <option value="">Selecciona una opción</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+
+            <div id="bloque-familiar-info" class="campo-condicional">
+                <label for="familiarCompania">Favor dar su nombre y el departamento donde trabaja:</label>
+                <input type="text" id="familiarCompania" placeholder="Ej: Juan Pérez - Departamento de Ventas">
+            </div>
+
+            <!-- Preguntas dinámicas adicionales de la empresa si aplica -->
+            <div id="contenedor-preguntas-extras"></div>
+
+            <button type="submit" id="btn-enviar-solicitud">Enviar Solicitud</button>
+        </form>
+    </div>
+
+    <!-- Vinculación del script externo -->
+    <script type="module" src="aplicar.js"></script>
+</body>
+</html>

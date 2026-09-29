@@ -39,7 +39,7 @@ console.log("🚀 script.js iniciado correctamente.");
         const fechaVacante = normalizarFecha(fechaOriginal);
         const hoy = new Date();
 
-        // Normalizamos ambas fechas a medianoche (00:00:00) para comparar días reales y no horas exactas
+        // Normalizamos ambas fechas a medianoche (00:00:00) para comparar días naturales exactos
         const vacanteSinHora = new Date(fechaVacante.getFullYear(), fechaVacante.getMonth(), fechaVacante.getDate());
         const hoySinHora = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
 
@@ -53,6 +53,7 @@ console.log("🚀 script.js iniciado correctamente.");
         const sem = Math.floor(diffDias / 7);
         return sem === 1 ? 'Hace 1 semana' : `Hace ${sem} semanas`;
     }
+
     // --- CARGA Y RENDERIZADO ---
     async function cargarVacantes(esCargaInicial = false) {
         if (esCargaInicial) contenedor.innerHTML = "<p>Cargando vacantes...</p>";
@@ -129,12 +130,12 @@ console.log("🚀 script.js iniciado correctamente.");
 
     window.cambiarPagina = (num) => {
         paginaActual = num;
-        filtrarVacantes(false); // No reseteamos la página al navegar entre ellas
+        filtrarVacantes(false); 
         window.scrollTo(0, document.querySelector('.seccion-vacantes').offsetTop - 100);
     };
 
     function filtrarVacantes(resetPagina = true) {
-        if (resetPagina) paginaActual = 1; // Vuelve a la página 1 si el usuario escribe o busca
+        if (resetPagina) paginaActual = 1; 
 
         const texto = normalizarTexto(inputBuscador?.value || "");
 

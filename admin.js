@@ -135,7 +135,8 @@ async function cargarVacantes() {
 
         querySnapshot.forEach((docSnap) => {
             const data = docSnap.data();
-            const estadoVacante = data.estado || 'pendiente';
+            // Solución aplicada: Normalizar el estado a minúsculas y sin espacios
+            const estadoVacante = data.estado ? data.estado.toLowerCase().trim() : 'pendiente';
 
             if (estadoFiltro !== "todos" && estadoVacante !== estadoFiltro) {
                 return; 
